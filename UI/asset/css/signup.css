@@ -1,0 +1,140 @@
+
+
+
+@media(min-width: 900px) {
+    .banner-text{
+        color:rgb(199, 193, 193);
+        font-size: 14px;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        width:500px;
+        position: relative;
+        left:27%;
+    }
+   
+  }
+@media(max-width: 900px) {
+  
+    .topnav a {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+    .topnav.responsive {position: relative;}
+
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: center;
+    }
+    
+    
+    .banner-text{
+        color:rgb(199, 193, 193);
+        font-size: 14px;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        width:450px;
+        position: relative;
+        left:19%;
+    }
+  }
+  
+  @media  (max-width: 690px) {
+    .topnav.responsive {position: relative;}
+  
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .banner-text{
+        color:rgb(199, 193, 193);
+        font-size: 14px;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        width:300px;
+        position: relative;
+        left:15%;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: center;
+    }
+    .signup-form{
+        width:80%;
+        margin:0;
+        padding-top: 50px;
+        position: relative;
+        left:9%;
+    }
+  }
+  @media (max-width:500px){
+    .banner-text{
+        color:rgb(199, 193, 193);
+        font-size: 14px;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        width:200px;
+        position: relative;
+        left:20%;
+    }
+    .signup-form{
+        width:80%;
+        margin:0;
+        padding-top: 50px;
+        position: relative;
+        left:9%;
+    }
+    h3{
+        margin:0;
+        padding-top: 50px;
+        color:rgb(247, 225, 225);
+        text-align: center;  
+        width:90% ;
+        padding-left:20px;
+
+    }
+
+    .list-party{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding-top:20px;
+        grid-template-rows: 50px;
+        text-align: center;  
+    }
+    .td{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:15px;
+        font-weight: bold;
+        color:grey;
+    }
+    .btn{
+        width:100%;
+        padding:10px;
+        margin-top:10px;
+        margin-left:5%;
+        border:none;
+        color:white;
+        background:green;
+        font-weight: bold;
+    }
+  }
+  @media (max-width:250px){
+    .banner-text{
+        color:rgb(199, 193, 193);
+        font-size: 14px;
+        font-family: 'Times New Roman', Times, serif;
+        text-align: center;
+        width:170px;
+        height: auto;
+        position: relative;
+        left:0;
+    }
+}
