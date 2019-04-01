@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Banka</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./asset/css/reuseable.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./asset/css/profile.css"
+    />
+  </head>
+  <body>
+    <div class="backdrop"></div>
+    <header>
+      <div class="wrapper">
+        <div class="logo">
+          <h1 class="logo">
+            <a href="index.html"><span>Ban</span>ka</a>
+          </h1>
+        </div>
+        <div class="topnav" id="myTopnav">
+          <a href="index.html">Logout</a>
+          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+
+        <div class="banner"></div>
+      </div>
+    </header>
+
+    <section class="wrapper">
+      <div class="section-body">
+        <aside>
+          <div class="side-bar">
+            <li><a href="#">create bank account</a></li>
+            <li><a href="profile.html">view account profile</a></li>
+            <li>
+              <a href="transactionhistory.html">view transaction history</a>
+            </li>
+
+          </div>
+        </aside>
+
+        <div class="profile-result">
+          <div >
+     
+            <div class="signup-form">
+              <form>
+                  <h1 class="form-h1">Create Bank Account</h1>
+  
+                  <input type="text" id="fname" name="Fullname" placeholder="Full name" required >
+  
+                  <input type="text" id="type" name="office" placeholder="Account type(savings or current)" required>
+  
+                  <input type="text" id="address" name="address" placeholder="Address" required>
+  
+                  <input type="number" id="phone" name="number" placeholder="contact phone number" required>
+  
+                  <input type="email" id="email" name="email" placeholder=" email address" required>
+  
+                  <input type="text" id="imgurl" name="imgurl" placeholder="Image url" required>
+  
+                  <button type="submit" class="btn">Create Account</button>
+                
+                  
+              </form>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer">
+        <p class="copy-right">copyright @ olorunwa lawrence 2019</p>
+      </div>
+    </footer>
+    <script src="./asset/js/view.js"></script>
+  </body>
+</html>
