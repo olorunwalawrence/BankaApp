@@ -1,17 +1,11 @@
 #### What does this PR do?
 create express setup
 #### Description of the task to be completed
-- Install express
-- install nodemon
-- Install body-parser
+- create signup template
 #### How to manually test this PR
-- clone the [repo ](https://github.com/olorunwalawrence/)
-- on your terminal, run `git checkout  `
-- on your terminal, run npm install to install dependencies
-- on your terminal, run npm run start:dev to start the application.
-
-    
-
+- clone the [repo ](https://github.com/olorunwalawrence/BankaApp)
+- on your terminal, run `git checkout  signup-#165017435`
+- on visual studio code right click on the markup file and click review in browser to open in a browser.
 #### What is the story identity?
 
-#161847860
+ #165017435
