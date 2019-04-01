@@ -1,0 +1,158 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin:0;
+    padding:0;
+    background-color:black;
+   
+}
+.wrapper{
+    margin:0 auto;
+    width:85%;
+}
+
+h3{
+    margin:0;
+    padding-top: 20px;
+    color:rgb(187, 4, 4);
+    text-align: center;
+    font-size:25px;
+    
+}
+span{
+    color:rgb(187, 4, 4);
+}
+h2{
+    margin:0;
+    color:white;
+    padding-top:20px;
+    text-transform: capitalize;
+    text-align: center;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+ 
+  }
+  
+  .topnav a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 15px;
+  }
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(#5f5d5db9, #c2bfbfd3);
+    z-index: -1;
+}
+.h1{
+    margin:0;
+    text-align: center;
+    text-transform: capitalize;
+    color:rgb(25, 25, 83);
+    padding-top:30px;
+}
+span{
+    color:rgb(187, 4, 4);
+}
+
+.logo{
+    margin:0;
+    background: white;
+    height:50px;
+  padding: 5px 0 0 20px;
+  font-family:Arial, Helvetica, sans-serif
+}
+
+a{
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.banner{
+    height: 300px;
+    background-image: url("../images/image1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;;
+}
+
+.topnav .icon {
+    display: none;
+  }
+  section{
+    background-color: white;
+    margin:0 auto;
+    width:85%;
+    height: 100vh;
+}
+
+.signup-form{
+    width: 51%;
+    margin: 0;
+    padding-top: 50px;
+    position: relative;
+    left: 28%;
+}
+.btn{
+    width:40%;
+    padding:10px;
+    margin-top:10px;
+    margin-left:30%;
+    border:none;
+    color:white;
+    background:green;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+footer{
+    margin:0 auto;
+    width:85%;
+}
+
+.footer{
+   
+    height:40px;
+    background: rgb(36, 34, 34);
+    color:white;
+    margin:0;  
+}
+.footer .copy-right{
+    padding-top:7px;
+    margin:0;
+    text-align: center;
+}
+p{
+    text-align: center;
+}
+p > a{
+    text-decoration: none;
+    color:rgb(168, 21, 21);
+}
+.form-h1{
+    color:rgb(73, 69, 69);
+    text-align: center;
+}
+.signup-form input[type=text],
+ input[type=password],
+input[type=email],
+input[type=number]{
+    display: block;
+    padding:12px 20px;
+    width:100%;
+    margin-top:10px;
+    border:0 ;
+    border-bottom:1px solid gray; 
+    font-size: 14px;
+    text-transform: capitalize;
+}
+
