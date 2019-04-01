@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Banka</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./asset/css/reuseable.css"
+    />
+    <link
+    rel="stylesheet"
+    type="text/css"
+    media="screen"
+    href="./asset/css/admin-staff.css"
+  />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./asset/css/profile.css"
+    />
+  </head>
+  <body>
+    <div class="backdrop"></div>
+    <header>
+      <div class="wrapper">
+        <div class="logo">
+          <h1 class="logo">
+            <a href="index.html"><span>Ban</span>ka</a>
+          </h1>
+        </div>
+        <div class="topnav" id="myTopnav">
+          <a href="index.html">Logout</a>
+          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+
+        <div class="banner"></div>
+      </div>
+    </header>
+
+    <section class="wrapper">
+      <div class="section-body">
+        <aside>
+          <div class="side-bar">
+            <li><a href="addmin-staff-account.html">create admn/staff account</a></li>
+            <li><a href="accounts.html">view all bank account</a></li>
+            <li><a href="credit.html">credit/debit account</a></li>
+          
+          </div>
+        </aside>
+
+        <div class="profile-result">
+          <div >
+     
+            <div class="signup-form">
+              <form>
+                  <h1 class="form-h1">Create Admin/Staff Account</h1>
+  
+                  <input
+                  type="text"
+                  id="firstname"
+                  name="firstname"
+                  placeholder="First Name"
+                  required
+                />
+                <input
+                  type="text"
+                  id="lastname"
+                  name="lastname"
+                  placeholder="last Name"
+                  required
+                />
+    
+                <input
+                  type="text"
+                  id="uname"
+                  name="username"
+                  placeholder="username"
+                  required
+                />
+    
+                <input type="text" id="email" name="email" placeholder="email"  required/>
+    
+                <input
+                  type="password"
+                  id="pword"
+                  name="password"
+                  placeholder="password"
+                  required
+                />
+    
+                <input
+                  type="password"
+                  id="cpword"
+                  name="confirm-password"
+                  placeholder="confirm password"
+                  required
+                />
+
+                <div class="custom-select" style="width:200px;">
+                    <select>
+                      <option value="0">Select Role</option>
+                      <option value="1">Admin</option>
+                      <option value="2">Staff</option>
+                      
+                    </select>
+                  </div>
+             
+  
+                  <button type="submit" class="btn">Create Account</button>
+                
+                  
+              </form>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer">
+        <p class="copy-right">copyright @ olorunwa lawrence 2019</p>
+      </div>
+    </footer>
+    <script src="./asset/js/view.js"></script>
+  </body>
+</html>
