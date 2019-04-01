@@ -1,0 +1,38 @@
+
+.view{
+    color:blue;
+    cursor: pointer;
+}
+
+.delete{
+    color:blue;
+    cursor: pointer;
+}
+.view-transactions{
+    display: none;
+}
+.view-transactions .close{
+    position: relative;
+    top:0;
+    right: 0;
+    color: yellowgreen;
+    cursor: pointer;
+}
+#accounts{
+    position: absolute;;
+    top:250px;
+    background: white;
+    left:100px;
+    height:100px;
+    width: 80vw;
+    font-size: 100px;
+    padding:15px 40px;
+}
+
+a{
+    color:blue;
+    cursor: pointer;
+}
+#activate{
+    cursor: pointer;
+}
