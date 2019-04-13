@@ -36,3 +36,218 @@ a{
 #activate{
     cursor: pointer;
 }
+
+
+@media(min-width: 900px) {
+  
+    .view-transactionss{
+      display: none;
+    }
+    }
+  @media(max-width: 900px) {
+    .view-transactionss{
+      display: none;
+    }
+    .transaction-result{
+      flex:3;
+     width:700px;
+    }
+      .topnav a {display: none;}
+      .topnav a.icon {
+        float: right;
+        display: block;
+      }
+      .topnav.responsive {position: relative;}
+  
+      .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: center;
+      }
+      
+     
+    }
+    
+    @media  (max-width: 800px) {
+      
+      .topnav.responsive {position: relative;}
+    
+      .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      
+    
+      .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: center;
+      }
+      .transaction{
+        margin-left: 40px;
+      }
+    
+      .view-transaction{
+        display: none;
+      }
+      .view-transactionss{
+      
+        display:block;
+      }
+
+
+  section{
+      background-color: rgb(223, 217, 217);
+      margin:0 auto;
+      width:85%;
+      height: 120vh;
+      background: rgb(235, 231, 231);
+  }
+  .profile{
+    padding:10px;
+    text-align: left;
+    text-transform: capitalize;
+    color:black;
+    font-size: 14px;
+    display:block;
+    width: 200px;
+  }
+ 
+  #accounts{
+    position: absolute;
+    top: 250px;
+    background: lightgrey;
+    left: 300px;
+    height: 350px;
+    width: 300px;
+    font-size: 100px;
+    padding: 15px 40px;
+}
+  .viewprofile{
+    display: grid;
+    grid-template-columns: repeat(1,200px);
+    margin:10px 40px;
+  }
+  
+.profile-result{
+flex:2.5;
+width:275px;
+}
+    }
+
+    @media (max-width:500px){
+        .transaction{
+            margin-left: 40px;
+          }
+        
+          .view-transaction{
+            display: none;
+          }
+          .view-transactionss{
+          
+            display:block;
+          }
+          #accounts{
+            position: absolute;
+            top: 250px;
+            background: lightgrey;
+            left: 30px;
+            height: 350px;
+            width: 300px;
+            font-size: 100px;
+            padding: 15px 40px;
+        }
+  
+      section{
+          background-color: rgb(223, 217, 217);
+          margin:0 auto;
+          width:85%;
+          height: 120vh;
+          background: rgb(235, 231, 231);
+      }
+      .profile{
+        padding:10px;
+        text-align: left;
+        text-transform: capitalize;
+        color:black;
+        font-size: 14px;
+        display:block;
+        width: 200px;
+      }
+     
+      #accounts{
+        position: absolute;
+        top: 250px;
+        background: lightgrey;
+        left: 30px;
+        height: 350px;
+        width: 300px;
+        font-size: 100px;
+        padding: 15px 40px;
+    }
+      .viewprofile{
+        display: grid;
+        grid-template-columns: repeat(1,200px);
+        margin:10px 40px;
+      }
+      
+  .profile-result{
+    flex:2.5;
+   width:275px;
+  }
+    }
+  
+    @media (max-width:370px){
+        .view-transactionss{
+          
+            display:block;
+          }
+          #accounts{
+            position: absolute;
+            top: 250px;
+            background: lightgrey;
+            left: 30px;
+            height: 350px;
+            width: 300px;
+            font-size: 100px;
+            padding: 15px 40px;
+        }
+   
+      .form-h2{
+      color:rgb(73, 69, 69);
+      text-align: center;
+      }
+      section{
+        background-color: rgb(223, 217, 217);
+        margin:0 auto;
+        width:85%;
+        height: 120vh;
+        background: rgb(235, 231, 231);
+    }
+    .profile{
+      padding:10px;
+      text-align: left;
+      text-transform: capitalize;
+      color:black;
+      font-size: 14px;
+     width: 200px;
+    }
+    
+  .profile-result{
+  flex:2.5;
+  width:200px;
+  }
+  .transaction{
+    margin-left: 40px;
+  }
+
+  .view-transaction{
+    display: none;
+  }
+  }

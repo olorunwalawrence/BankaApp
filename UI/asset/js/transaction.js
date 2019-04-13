@@ -1,8 +1,10 @@
-/* eslint-disable require-jsdoc */
+
+  /* eslint-disable require-jsdoc */
 /* eslint-disable func-names */
 const display = document.querySelector('.views');
+const responsive_display = document.querySelector('.viewss');
 const close = document.querySelector('.close');
-const Delete = document.querySelector('.delete');
+
 
 /**
  ===========================================
@@ -16,6 +18,13 @@ const displayAccount = () => {
 
 display.addEventListener('click', displayAccount);
 
+const resDisplayAccount = () => {
+  document.querySelector('.view-transactions').style.display = 'block';
+};
+
+responsive_display.addEventListener('click', resDisplayAccount)
+
+
 const closeAccount = () => {
   document.querySelector('#accounts').style.display = 'none';
 };
@@ -23,13 +32,12 @@ close.addEventListener('click', closeAccount);
 const deleteAccount = () => {
   document.querySelector('#accounts').style.display = 'none';
 };
-Delete.addEventListener('click', deleteAccount);
 
-function myModal() {
-    let x = document.getElementById('status');
-    if (x.innerHTML === 'Active') {
-      x.innerHTML = 'Domant';
+const myFunction = () => {
+    let x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
     } else {
-      x.innerHTML = 'Active';
+      x.className = "topnav";
     }
   }
