@@ -70,10 +70,18 @@ aside{
 
 @media(min-width: 900px) {
   
-   
+  .view-transactionss{
+    display: none;
+  }
   }
 @media(max-width: 900px) {
-  
+  .view-transactionss{
+    display: none;
+  }
+  .transaction-result{
+    flex:3;
+   width:800px;
+  }
     .topnav a {display: none;}
     .topnav a.icon {
       float: right;
@@ -96,6 +104,21 @@ aside{
   }
   
   @media  (max-width: 690px) {
+  
+    #accounts{
+      position: absolute;;
+      top:250px;
+      background: white;
+      left:100px;
+      height:100px;
+      width: 100vw;
+      font-size: 100px;
+      padding:15px 40px;
+      /* display:block ; */
+  }
+    /* .view-transaction{
+      display: none;
+    } */
     .topnav.responsive {position: relative;}
   
     .topnav.responsive .icon {
@@ -113,15 +136,7 @@ aside{
   }
   @media (max-width:500px){
   
-    h3{
-        margin:0;
-        padding-top: 50px;
-        color:rgb(247, 225, 225);
-        text-align: center;  
-        width:90% ;
-        padding-left:20px;
 
-    }
     section{
         background-color: rgb(223, 217, 217);
         margin:0 auto;
@@ -129,9 +144,87 @@ aside{
         height: 120vh;
         background: rgb(235, 231, 231);
     }
-
+    .profile{
+      padding:10px;
+      text-align: left;
+      text-transform: capitalize;
+      color:black;
+      font-size: 14px;
+      display:block;
+      width: 200px;
+    }
+    .viewprofile{
+      display: grid;
+      grid-template-columns: repeat(1,200px);
+      margin:10px 40px;
+    }
+    
+    .signup-form{
+      width:80%;
+      margin:0;
+      padding-top: 50px;
+      position: relative;
+      left:9%;
+  }
+  .btn{
+      width:100%;
+      padding:10px;
+      margin-top:30px;
+      margin-left:5%;
+      border:none;
+      color:white;
+      background:green;
+      font-weight: bold;
+  }
+  
+    
+.profile-result{
+  flex:2.5;
+ width:275px;
+}
   }
 
-  @media (max-width:250px){
+  @media (max-width:370px){
+    .form-h2{
+    color:rgb(73, 69, 69);
+    text-align: center;
+    }
+    section{
+      background-color: rgb(223, 217, 217);
+      margin:0 auto;
+      width:85%;
+      height: 120vh;
+      background: rgb(235, 231, 231);
+  }
+  .profile{
+    padding:10px;
+    text-align: left;
+    text-transform: capitalize;
+    color:black;
+    font-size: 14px;
+   width: 200px;
+  }
+  
+.profile-result{
+flex:2.5;
+width:200px;
+}
+.signup-form{
+  width:80%;
+  margin:0;
+  padding-top: 50px;
+  position: relative;
+  left:9%;
+}
 
+.btn{
+  width:100%;
+  padding:10px;
+  margin-top:30px;
+  margin-left:5%;
+  border:none;
+  color:white;
+  background:green;
+  font-weight: bold;
+}
 }
