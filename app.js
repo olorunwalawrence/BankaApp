@@ -1,18 +1,15 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-
-// import apiRoute from './server/routes/authRoutes';
+import route from './dummy/routes/index';
 
 
 const app = express();
 
-const port = parseInt(process.env.PORT, 10) || 8000;
+const port = parseInt(process.env.PORT, 10) || 9000;
 const print = console;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// app.use('/api/v1', route);
-// app.use('/api/v1', apiRoute);
+app.use('/api/v1', route);
 app.get('/api/v1', (req, res) => res.status(200).json({
   message: 'this is the application home page'
 }));
