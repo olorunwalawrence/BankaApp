@@ -5,12 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start:dev": "nodemon app.js --exec babel-node --",
-    "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
-    "test:dev": "  nyc --reporter=html --reporter=text mocha server/test --compilers js:babel-core/register --require babel-polyfill--timeout 50000ms --exit",
-    "test": "npm run test:dev",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "report-coverage": "cat ./coverage/lcov.info | coveralls",
-    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test"
+
   },
   "author": "olorunwa lawrence",
   "license": "ISC",
