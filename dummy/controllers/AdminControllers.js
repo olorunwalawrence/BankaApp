@@ -66,4 +66,45 @@ export default class AdminFunctionality {
     return res.status(404).json({ message: '404, account not found' });
   }
 
+  static creaditAccount(req, res) {
+    const { firstname, isAdmin } = req.decoded;
+    const { accountNumber } = req.params;
+    let newBalance = {};
+    const createdOn = new Date();
+    const { type, amount } = req.body;
+
+
+    if (!verifyAdmin(isAdmin)) {
+      return res.status(400).json({
+        status: 400,
+        message: 'only an admin is allowed to perform this task'
+      });
+    }
+
+    transactionDb.forEach((acct) => {
+        const balance = Number(acct.oldBalance) + Number(amount);
+        newBalance = balance;
+      });
+
+    
+
+    const data = {
+      createdOn,
+      type,
+      amount,
+      cashier: firstname,
+      newBalance
+    };
+    transactionDb.push(data);
+
+    return res.status(201).json({
+      status: 201,
+      message: `your account ${accountNumber} has been credited with ${amount} on ${createdOn}`,
+      data: {
+        type,
+        amount,
+        newBalance
+      }
+    });
+  }
 }
