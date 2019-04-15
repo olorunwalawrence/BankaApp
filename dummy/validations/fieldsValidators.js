@@ -98,4 +98,23 @@ export default class Validator {
       });
     }
   }
+
+  static acctStatusValidation(req, res, next) {
+    const {
+      acctStatus
+    } = req.body;
+    try {
+      if (acctStatus.trim() === '') {
+        return res.status(400).json({ message: ' acct status field cannot be empty' });
+      }
+
+   
+      next();
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: 'JSON object should contain { acctStatus}'
+      });
+    }
+  }
 }
