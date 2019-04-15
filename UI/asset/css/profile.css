@@ -53,6 +53,7 @@ aside{
   text-transform: capitalize;
   color:black;
   font-size: 15px;
+  width:200px;
 }
 
 .side-bar li{
@@ -104,7 +105,9 @@ aside{
   }
   
   @media  (max-width: 690px) {
-  
+    aside{
+      display: none;
+    }
     #accounts{
       position: absolute;;
       top:250px;
@@ -136,7 +139,9 @@ aside{
   }
   @media (max-width:500px){
   
-
+    aside{
+      display: none;
+    }
     section{
         background-color: rgb(223, 217, 217);
         margin:0 auto;
@@ -185,6 +190,9 @@ aside{
   }
 
   @media (max-width:370px){
+    aside{
+      display: none;
+    }
     .form-h2{
     color:rgb(73, 69, 69);
     text-align: center;
