@@ -13,7 +13,7 @@ export default class Validator {
   // VALIDATE MEAL FORM FIELD
   static userValidation(req, res, next) {
     const {
-      firstname, lastname, email, type, isAdmin
+      firstname, lastname, email, type, isAdmin, password
     } = req.body;
     try {
       const regex = /^[a-zA-Z\s]*$/;
@@ -43,6 +43,11 @@ export default class Validator {
         return res
           .status(400)
           .json({ message: 'type cannot be empty' });
+      }
+      if (password.trim() === '') {
+        return res
+          .status(400)
+          .json({ message: 'password cannot be empty' });
       }
       if (!regex.test(type)) {
         return res
