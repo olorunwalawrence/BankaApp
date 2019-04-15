@@ -6,5 +6,13 @@ const userFieldRequiredValidation = (firstname, lastname, email, type, password,
     });
   }
 };
+export const loginFieldRequiredValidation = ( email, password ,res) => {
+  if ( !email || !password ) {
+    return res.status(400).send({
+      success: 'false',
+      message: 'field required'
+    });
+  }
+};
 
 export default userFieldRequiredValidation;
