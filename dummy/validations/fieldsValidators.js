@@ -71,26 +71,26 @@ export default class Validator {
     }
   }
 
-  // static loginValidation(req, res, next) {
-  //   const {
-  //      email,password
-  //   } = req.body;
-  //   try {
-  //     if (password.trim() === '') {
-  //       return res.status(400).json({ message: ' firstname field cannot be empty' });
-  //     }
+  static loginValidation(req, res, next) {
+    const {
+       email,password
+    } = req.body;
+    try {
+      if (password.trim() === '') {
+        return res.status(400).json({ message: ' password field cannot be empty' });
+      }
 
-  //     if (email.trim() === '') {
-  //       return res
-  //         .status(400)
-  //         .json({ message: 'email cannot be empty' });
-  //     }
-  //     next();
-  //   } catch (error) {
-  //     return res.status(400).json({
-  //       status: 400,
-  //       error: 'JSON object should contain {  email, password }'
-  //     });
-  //   }
-  // }
+      if (email.trim() === '') {
+        return res
+          .status(400)
+          .json({ message: 'email cannot be empty' });
+      }
+      next();
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: 'JSON object should contain {  email, password }'
+      });
+    }
+  }
 }

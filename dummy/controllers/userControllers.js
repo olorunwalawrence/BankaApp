@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 import userDb from '../db/userDummyDb';
-import UserFieldRequired from '../validations/userValidation';
+import UserFieldRequired, { loginFieldRequiredValidation } from '../validations/userValidation';
 
 config();
 const secret = process.env.SECRET;
@@ -54,6 +54,42 @@ export default class UserControllers {
         isAdmin,
         type
       }
+
+    });
+  }
+
+  static userLogin(req, res) {
+    const { password, email } = req.body;
+    let Users = {};
+    userDb.filter((user) => {
+      Users = user;
+    });
+
+    loginFieldRequiredValidation(email, password , res)
+
+    if (Users.email !== email) {
+      return res.status(400).json({
+        status: 404,
+        message: 'user with this email does not exit'
+      });
+    }
+
+    const data = {
+      email,
+      password
+    };
+
+    const { id, isAdmin, firstname, lastname } = Users;
+    const token = jwt.sign({ id, isAdmin, email, firstname, lastname }, secret, { expiresIn: '10h' });
+    userDb.push(data);
+    return res.status(201).json({
+      message: `${firstname}  is successfully logged in`,
+      data:{
+        firstname,
+        lastname,
+        email
+      },
+      token
 
     });
   }
