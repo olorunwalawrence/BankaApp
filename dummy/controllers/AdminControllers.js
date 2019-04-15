@@ -107,4 +107,47 @@ export default class AdminFunctionality {
       }
     });
   }
+
+  static debitAccount(req, res) {
+    const { firstname, isAdmin } = req.decoded;
+    const { accountNumber } = req.params;
+    let newBalance = '';
+    const createdOn = new Date();
+    const {
+      type, amount
+    } = req.body;
+
+    if (!verifyAdmin(isAdmin)) {
+      return res.status(400).json({
+        status: 400,
+        message: 'only an admin is allowed to perform this task'
+      });
+    }
+
+    transactionDb.forEach((acct) => {
+      const balance = Number(acct.oldBalance) - Number(amount);
+      newBalance = balance;
+    });
+
+
+    const data = {
+      createdOn,
+      type,
+      amount,
+      cashier: firstname,
+      newBalance
+    };
+    transactionDb.push(data);
+    return res.status(201).json({
+      status: 201,
+      message: `your account ${accountNumber} has been debited with ${amount} on ${createdOn}`,
+      data: {
+        accountNumber,
+        amount,
+        cashier: firstname,
+        transactionType: type,
+        newBalance
+      }
+    });
+  }
 }
