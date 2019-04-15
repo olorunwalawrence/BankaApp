@@ -12,7 +12,7 @@ const { createUser, userLogin  } = userControllers;
 const { userValidation, loginValidation, acctStatusValidation } = validator;
 const { acctValidation } = acctValidator;
 const { 
-    ActivatOrDeactivateAccct, deleteAccount,creaditAccount
+    ActivatOrDeactivateAccct, deleteAccount,creaditAccount, debitAccount
     } = adminController;
 router.post('/auth/signup', userValidation,createUser);
 router.post('/auth/login', loginValidation, userLogin);
@@ -20,4 +20,5 @@ router.post('/accounts', acctValidation, verifyuser, createAccount);
 router.patch('/account/:accountNumber',acctStatusValidation, verifyuser, ActivatOrDeactivateAccct);
 router.delete('/account/:accountNumber', verifyuser, deleteAccount);
 router.post('/transactions/:accountNumber/credit', verifyuser, creaditAccount);
+router.post('/transactions/:accountNumber/debit', verifyuser, debitAccount);
 export default router;
