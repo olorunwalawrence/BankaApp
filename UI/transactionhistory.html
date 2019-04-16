@@ -40,6 +40,12 @@
         </div>
         <div class="topnav" id="myTopnav">
           <a href="index.html">Logout</a>
+          <div class="mobile-nav">
+              <a href="addmin-staff-account.html">create admn/staff account</a>
+              <a href="accounts.html">view all bank account</a>
+              <a href="credit.html">credit/debit account</a>
+          </div>
+        
           <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
           </a>
@@ -65,9 +71,68 @@
             
             <div class="transaction-result">
                 <h1 class="form-h1">Transaction History</h1>
-                <div class="transaction-container">
+              <div class="transaction-container">
+                  <div style="overflow-x:auto;">
+                      <table>
+                        <tr>
+                            <th>Account name</th>
+                            <th>Account Number</th>
+                            <th>Account Balance</th>
+                            <th>Bvn</th>
+                            <th>mount</th>
+                            <th>view</th>  
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>12324567890-</td>
+                            <td>20,0000.00</td>
+                            <td>2345678976543</td>
+                            <td>20,000.00</td>
+                            <td><a class="views">view</a></td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>12324567890-</td>
+                            <td>20,0000.00</td>
+                            <td>2345678976543</td>
+                            <td>20,000.00</td>
+                            <td><a class="views">view</a></td>
+                        </tr>
+                        <td>John Doe</td>
+                        <td>12324567890-</td>
+                        <td>20,0000.00</td>
+                        <td>2345678976543</td>
+                        <td>20,000.00</td>
+                        <td><a class="views">view</a></td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>12324567890-</td>
+                            <td>20,0000.00</td>
+                            <td>2345678976543</td>
+                            <td>20,000.00</td>
+                            <td>view</td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>12324567890-</td>
+                            <td>20,0000.00</td>
+                            <td>2345678976543</td>
+                            <td>20,000.00</td>
+                            <td>view</td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>12324567890-</td>
+                            <td>20,0000.00</td>
+                            <td>2345678976543</td>
+                            <td>20,000.00</td>
+                            <td><a class="views">view</a></td>
+                        </tr>
+                      </table>
+                    </div>
 
-                  <div class="view-transaction">
+                <!--  <div class="view-transaction">
                      
                     <div class="transaction">account name</div>
                     <div class="transaction">John doe</div>
@@ -148,7 +213,7 @@
                         <div class="transaction">200,000.00</div>
                         <div class="transaction"><a class="viewss">view</a></div>
                     </div>
-              </div>
+              </div> -->
             </div>
      
       </div>
@@ -159,7 +224,7 @@
         <p class="copy-right">copyright @ olorunwa lawrence 2019</p>
       </div>
     </footer>
-    <script src="./asset/js/transaction.js">
+    <script src="./asset/js/index.js">
 
 
     </script>
