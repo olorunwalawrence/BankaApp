@@ -5,7 +5,8 @@ import route from './dummy/routes/index';
 
 const app = express();
 
-const port = parseInt(process.env.PORT, 10) || 9000;
+const port = process.env.PORT || 9000;
+
 const print = console;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
