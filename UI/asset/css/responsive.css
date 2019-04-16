@@ -4,7 +4,9 @@
    
 }
 @media(max-width: 900px) {
-
+.mobile-nav{
+  display:none;
+}
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;

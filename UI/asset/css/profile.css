@@ -1,3 +1,4 @@
+
 .section-body{
 display:flex;
 }
@@ -67,15 +68,20 @@ aside{
     color:white;
 }
 
-
+.acct-title{
+  text-align: center;
+}
 
 @media(min-width: 900px) {
-  
+  .mobile-nav{
+    display: block;
+  }
   .view-transactionss{
     display: none;
   }
   }
 @media(max-width: 900px) {
+ 
   .view-transactionss{
     display: none;
   }
@@ -150,18 +156,18 @@ aside{
         background: rgb(235, 231, 231);
     }
     .profile{
-      padding:10px;
-      text-align: left;
-      text-transform: capitalize;
-      color:black;
-      font-size: 14px;
-      display:block;
-      width: 200px;
+      padding: 10px;
+  
+    text-transform: capitalize;
+    color: black;
+    font-size: 14px;
+    text-align: center;
     }
     .viewprofile{
       display: grid;
       grid-template-columns: repeat(1,200px);
       margin:10px 40px;
+     
     }
     
     .signup-form{
@@ -175,7 +181,7 @@ aside{
       width:100%;
       padding:10px;
       margin-top:30px;
-      margin-left:5%;
+      margin-left: 1%;
       border:none;
       color:white;
       background:green;
@@ -206,7 +212,7 @@ aside{
   }
   .profile{
     padding:10px;
-    text-align: left;
+    text-align: center;
     text-transform: capitalize;
     color:black;
     font-size: 14px;
@@ -226,13 +232,13 @@ width:200px;
 }
 
 .btn{
-  width:100%;
-  padding:10px;
-  margin-top:30px;
-  margin-left:5%;
-  border:none;
-  color:white;
-  background:green;
+  width: 100%;
+  padding: 10px;
+  margin-top: 30px;
+  margin-left: 1%;
+  border: none;
+  color: white;
+  background: green;
   font-weight: bold;
 }
 }

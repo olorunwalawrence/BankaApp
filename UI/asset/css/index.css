@@ -1,16 +1,11 @@
 
 section{
-  /* background-image: url("../images/image1.jpg"); */
+  background-image: url("../images/image1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   width:100%;
 }
-.imagewrapper{
-  background-image: url("../images/image1.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: none;
-}
+
 
 .banner {
   width: 100%;
@@ -109,6 +104,7 @@ img {
 
 
 @media (min-width: 900px) {
+}
 
   .image {
     display: none;
@@ -165,6 +161,12 @@ img {
 
 }
 @media (max-width: 900px) {
+  section{
+    background-image: url("../images/image1.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    width:100%;
+  
   .topnav a {
     display: none;
   }
