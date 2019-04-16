@@ -7,7 +7,7 @@
     "start:dev": "nodemon app.js --exec babel-node --",
     "start": "babel-node app.js",
     "migrate": "sequelize db:migrate:undo:all && sequelize db:migrate",
-    "test:dev": "  nyc --reporter=html --reporter=text mocha server/test --compilers js:babel-core/register --require babel-polyfill--timeout 50000ms --exit",
+    "test:dev": "  nyc --reporter=html --reporter=text mocha dummy/test --compilers js:babel-core/register --timeout 50000ms --exit",
     "test": "npm run test:dev",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",

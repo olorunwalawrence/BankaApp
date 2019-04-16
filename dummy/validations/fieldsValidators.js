@@ -18,7 +18,7 @@ export default class Validator {
     try {
       const regex = /^[a-zA-Z\s]*$/;
       if (firstname.trim() === '') {
-        return res.status(400).json({ message: ' firstname field cannot be empty' });
+        return res.status(400).json({ message: 'firstname field cannot be empty' });
       }
       if (!regex.test(firstname)) {
         return res
@@ -82,7 +82,7 @@ export default class Validator {
     } = req.body;
     try {
       if (password.trim() === '') {
-        return res.status(400).json({ message: ' password field cannot be empty' });
+        return res.status(400).json({ message: 'password field cannot be empty' });
       }
 
       if (email.trim() === '') {

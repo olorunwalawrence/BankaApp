@@ -10,7 +10,7 @@ export const loginFieldRequiredValidation = ( email, password ,res) => {
   if ( !email || !password ) {
     return res.status(400).send({
       success: 'false',
-      message: 'field required'
+      message: 'field required' 
     });
   }
 };
