@@ -1,4 +1,6 @@
-
+.mobile-nav{
+  display: none;
+}
 .view{
     color:blue;
     cursor: pointer;
@@ -13,7 +15,7 @@ table {
   border-spacing: 0;
   width: 100%;
   border: 1px solid #ddd;
-  overflow-x: auto;
+  overflow-x: scroll;
 }
 
 th, td {
@@ -59,12 +61,15 @@ a{
     }
     }
   @media(max-width: 900px) {
+    .mobile-nav{
+      display: block;
+    }
     .view-transactionss{
       display: none;
     }
     .transaction-result{
       flex:3;
-     width:700px;
+     width:200px;
     }
       .topnav a {display: none;}
       .topnav a.icon {

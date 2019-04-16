@@ -18,7 +18,7 @@ export default class Validators {
     try {
       const regex = /^[a-zA-Z\s]*$/;
       if (status.trim() === '') {
-        return res.status(400).json({ message: ' status field cannot be empty' });
+        return res.status(400).json({ message: 'status field cannot be empty' });
       }
       if (!regex.test(status)) {
         return res
@@ -55,7 +55,7 @@ export default class Validators {
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        error: 'JSON object should contain {  type, status, openingBalance }'
+        error: 'JSON object should contain {type,status,openingBalance }'
       });
     }
   }
