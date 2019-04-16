@@ -2,7 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import route from './dummy/routes/index';
 
-
 const app = express();
 
 const port = process.env.PORT || 9000;
