@@ -10,8 +10,8 @@ const secret = process.env.SECRET;
 const verifyUser = (req, res, next) => {
 	const token = req.headers['x-access-token'];
 	if (!token) {
-		res.status(301).json({
-			status: 301,
+		res.status(403).json({
+			status: 403,
 			error: 'authentication failed, please login'
 		});
 	}
@@ -28,7 +28,7 @@ const verifyUser = (req, res, next) => {
 	} catch (error) {
 		res.status(400).json({
 			status:400,
-			error: 'invalid token, you are not a valid user'
+			error: 'authentication failed, consider logging in again'
 		});
 	}
 };
