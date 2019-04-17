@@ -1,5 +1,5 @@
+import {validationResult} from 'express-validator/check'
 /* eslint-disable require-jsdoc */
-
 export default class Validator {
   /**
        *
@@ -10,7 +10,19 @@ export default class Validator {
        * @param {*} error
        */
 
-  // VALIDATE MEAL FORM FIELD
+  static validateInput(req, res, next) {
+    const error = validationResult(req);
+    let message;
+    error.array().forEach((messages) => {
+      message = messages.msg;
+    });
+    if (!error.isEmpty()) {
+      return res.status(422).json({ errors: message });
+    }
+    next();
+  }
+
+  // VALIDATE FORM FIELD
   static userValidation(req, res, next) {
     const {
       firstname, lastname, email, type, isAdmin, password

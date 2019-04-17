@@ -10,7 +10,7 @@ export default class Validators {
          * @param {*} message
          */
 
-  // VALIDATE MEAL FORM FIELD
+  // VALIDATE  FORM FIELD
   static acctValidation(req, res, next) {
     const {
         type, openingBalance
@@ -50,6 +50,85 @@ export default class Validators {
     }
   }
 
-  
+
+
+  static creditValidation(req, res, next) {
+    const {
+        type,amount
+    } = req.body;
+    try {
+      const regex = /^[a-zA-Z\s]*$/;
+      if (amount.trim() === '') {
+        return res.status(400).json({
+          status:400,
+           error: 'amount cannot be empty' });
+      }
+     
+      if (type.trim() === '') {
+        return res
+          .status(400)
+          .json({
+            status:400,
+            error: 'type cannot be empty' 
+             });
+      }
+      if (!regex.test(type)) {
+        return res
+          .status(400)
+          .json({
+            status:400,
+            error: 'type can only be letters'
+           });
+      }
+
+
+      next();
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: 'please provide these specifies fields {type,amount }'
+      });
+    }
+  }
+  static debitValidation(req, res, next) {
+    const {
+        type,amount
+    } = req.body;
+    try {
+      const regex = /^[a-zA-Z\s]*$/;
+      if (amount.trim() === '') {
+        return res.status(400).json({
+          status:400,
+           error: 'amount cannot be empty' });
+      }
+     
+      if (type.trim() === '') {
+        return res
+          .status(400)
+          .json({
+            status:400,
+            error: 'type cannot be empty' 
+             });
+      }
+      if (!regex.test(type)) {
+        return res
+          .status(400)
+          .json({
+            status:400,
+            error: 'type can only be letters'
+           });
+      }
+
+
+      next();
+    } catch (error) {
+      return res.status(400).json({
+        status: 400,
+        error: 'please provide these specifies fields {type,amount }'
+      });
+    }
+  }
+
+
 }
 

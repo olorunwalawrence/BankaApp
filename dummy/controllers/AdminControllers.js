@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable require-jsdoc */
+import shortid from 'shortid';
 import accountDb from '../db/AccountDb';
 import verifyAdmin from '../helpers/isAdmin';
 import transactionDb from '../db/transactionDb';
@@ -16,7 +17,7 @@ export default class AdminFunctionality {
     }
 
     let updatedStatus = {};
-  
+
     
     const { accountNumber } = req.params;
     accountDb.forEach((acct) => {
@@ -70,10 +71,9 @@ export default class AdminFunctionality {
   }
 
   static creaditAccount(req, res) {
-    const { firstname, isAdmin } = req.decoded;
+    const { firstname, isAdmin, id } = req.decoded;
     const { accountNumber } = req.params;
-    let newBalance = {};
-    const createdOn = new Date();
+     const createdOn = new Date();
     const { type, amount } = req.body;
 
 
@@ -84,37 +84,37 @@ export default class AdminFunctionality {
       });
     }
 
-    transactionDb.forEach((acct) => {
-        const balance = Number(acct.oldBalance) + Number(amount);
-        newBalance = balance;
-      });
 
     
 
     const data = {
+      transactionId: shortid.generate(),
       createdOn,
       type,
       amount,
       cashier: firstname,
-      newBalance
     };
+    const { transactionId } = data;
+
     transactionDb.push(data);
 
     return res.status(201).json({
       status: 201,
-      error: `your account ${accountNumber} has been credited with ${amount} on ${createdOn}`,
+
       data: {
-        type,
+        transactionId,
         amount,
-        newBalance
+        accountNumber,
+        cashier:id,
+        transactionType: type,
+        accountBalance: amount
       }
     });
   }
 
   static debitAccount(req, res) {
-    const { firstname, isAdmin } = req.decoded;
+    const { firstname, isAdmin, id } = req.decoded;
     const { accountNumber } = req.params;
-    let newBalance = '';
     const createdOn = new Date();
     const {
       type, amount
@@ -127,29 +127,30 @@ export default class AdminFunctionality {
       });
     }
 
-    transactionDb.forEach((acct) => {
-      const balance = Number(acct.oldBalance) - Number(amount);
-      newBalance = balance;
-    });
 
 
     const data = {
-      createdOn,
-      type,
+      transactionId: shortid.generate(),
+      accountNumber,
       amount,
-      cashier: firstname,
-      newBalance
+      createdOn,
+      cashier: id,
+      transactiontype:type,
+     
+      
     };
+    const {transactionId } = data;
+
     transactionDb.push(data);
     return res.status(201).json({
       status: 201,
-      error: `your account ${accountNumber} has been debited with ${amount} on ${createdOn}`,
       data: {
+       transactionId,
         accountNumber,
         amount,
-        cashier: firstname,
+        cashier:id,
         transactionType: type,
-        newBalance
+        accountBalance:amount
       }
     });
   }

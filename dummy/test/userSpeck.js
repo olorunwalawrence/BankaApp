@@ -45,8 +45,8 @@ describe('API ENDPOINTS', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
-        res.body.should.have.property('message');
-        res.body.message.should.be.equal('firstname field cannot be empty');
+        res.body.should.have.property('error');
+        res.body.error.should.be.equal('firstname field cannot be empty');
       });
     done();
   });
@@ -65,8 +65,8 @@ describe('API ENDPOINTS', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
-        res.body.should.have.property('message');
-        res.body.message.should.be.equal('firstname can only be letters');
+        res.body.should.have.property('error');
+        res.body.error.should.be.equal('firstname can only be letters');
       });
     done();
   });
@@ -86,8 +86,8 @@ describe('API ENDPOINTS', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
-        res.body.should.have.property('message');
-        res.body.message.should.be.equal('lastname cannot be empty');
+        res.body.should.have.property('error');
+        res.body.error.should.be.equal('lastname cannot be empty');
       });
     done();
   });
@@ -106,8 +106,8 @@ describe('API ENDPOINTS', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
-        res.body.should.have.property('message');
-        res.body.message.should.be.equal('lastname can only be letters');
+        res.body.should.have.property('error');
+        res.body.error.should.be.equal('lastname can only be letters');
       });
     done();
   });
@@ -126,8 +126,8 @@ describe('API ENDPOINTS', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
-        res.body.should.have.property('message');
-        res.body.message.should.be.equal('email cannot be empty');
+        res.body.should.have.property('error');
+        res.body.error.should.be.equal('email cannot be empty');
       });
     done();
   });
@@ -146,8 +146,8 @@ describe('API ENDPOINTS', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
-        res.body.should.have.property('message');
-        res.body.message.should.be.equal('type cannot be empty');
+        res.body.should.have.property('error');
+        res.body.error.should.be.equal('type cannot be empty');
       });
     done();
   });
@@ -166,8 +166,8 @@ describe('API ENDPOINTS', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
-        res.body.should.have.property('message');
-        res.body.message.should.be.equal('password cannot be empty');
+        res.body.should.have.property('error');
+        res.body.error.should.be.equal('password cannot be empty');
       });
     done();
   });
@@ -187,8 +187,8 @@ describe('API ENDPOINTS', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
-        res.body.should.have.property('message');
-        res.body.message.should.be.equal('isAdmin cannot be empty');
+        res.body.should.have.property('error');
+        res.body.error.should.be.equal('isAdmin cannot be empty');
       });
     done();
   });
@@ -203,7 +203,7 @@ describe('API ENDPOINTS', () => {
           password: 'johndoe'
         })
         .end((err, res) => {
-          res.should.have.status(201);
+          res.should.have.status(200);
           res.body.should.be.an('object');
         });
       done();
@@ -221,8 +221,8 @@ describe('API ENDPOINTS', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
-        res.body.should.have.property('message');
-        res.body.message.should.be.equal('password field cannot be empty');
+        res.body.should.have.property('error');
+        res.body.error.should.be.equal('password field cannot be empty');
       });
     done();
   });
@@ -238,8 +238,8 @@ describe('API ENDPOINTS', () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
-        res.body.should.have.property('message');
-        res.body.message.should.be.equal('email cannot be empty');
+        res.body.should.have.property('error');
+        res.body.error.should.be.equal('email cannot be empty');
       });
     done();
   });
