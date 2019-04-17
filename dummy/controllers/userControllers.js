@@ -81,12 +81,6 @@ export default class UserControllers {
     }
 
 
-    if (isExist.length < 1) {
-      return res.status(400).json({
-        status: 404,
-        error: 'user with this email does not exit'
-      });
-    }
     if (!pass) {
       return res.status(401).json({
         status: '404',
