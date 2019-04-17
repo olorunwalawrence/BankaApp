@@ -11,12 +11,12 @@ export default class AdminFunctionality {
     if (!verifyAdmin(isAdmin)) {
       return res.status(400).json({
         status: 400,
-        message: 'only an admin is alloewd to perform this task'
+        error: 'only an admin is alloewd to perform this task'
       });
     }
 
     let updatedStatus = {};
-    // let status = req.body.acctStatus;
+  
     
     const { accountNumber } = req.params;
     accountDb.forEach((acct) => {
@@ -50,7 +50,7 @@ export default class AdminFunctionality {
     if (!verifyAdmin(isAdmin)) {
       return res.status(400).json({
         status: 400,
-        message: 'only an admin is alloewd to perform this task'
+        error: 'only an admin is allowd to perform this task'
       });
     }
 
@@ -59,11 +59,14 @@ export default class AdminFunctionality {
         accountDb.splice(i, 1);
         return res.status(200).json({
           status: 200,
-          message: 'seleted account successfully deleted'
+          error: 'seleted account successfully deleted'
         });
       }
     }
-    return res.status(404).json({ message: '404, account not found' });
+    return res.status(404).json({ 
+      status: 400,
+      error: 'The specified account does not exist'
+    });
   }
 
   static creaditAccount(req, res) {
@@ -77,7 +80,7 @@ export default class AdminFunctionality {
     if (!verifyAdmin(isAdmin)) {
       return res.status(400).json({
         status: 400,
-        message: 'only an admin is allowed to perform this task'
+        error: 'only an admin is allowed to perform this task'
       });
     }
 
@@ -99,7 +102,7 @@ export default class AdminFunctionality {
 
     return res.status(201).json({
       status: 201,
-      message: `your account ${accountNumber} has been credited with ${amount} on ${createdOn}`,
+      error: `your account ${accountNumber} has been credited with ${amount} on ${createdOn}`,
       data: {
         type,
         amount,
@@ -120,7 +123,7 @@ export default class AdminFunctionality {
     if (!verifyAdmin(isAdmin)) {
       return res.status(400).json({
         status: 400,
-        message: 'only an admin is allowed to perform this task'
+        error: 'only an admin is allowed to perform this task'
       });
     }
 
@@ -140,7 +143,7 @@ export default class AdminFunctionality {
     transactionDb.push(data);
     return res.status(201).json({
       status: 201,
-      message: `your account ${accountNumber} has been debited with ${amount} on ${createdOn}`,
+      error: `your account ${accountNumber} has been debited with ${amount} on ${createdOn}`,
       data: {
         accountNumber,
         amount,
