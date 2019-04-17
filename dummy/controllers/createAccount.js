@@ -11,15 +11,16 @@ export default class Account {
     const userId = id;
     const accountNumber = Math.floor(Math.random() * 10000000000);
     const date = new Date();
+    const status = 'active';
 
     const {
-      type, status, openingBalance
+      type, openingBalance
     } = req.body;
     
-    if (!type || !status || !openingBalance) {
+    if (!type  || !openingBalance) {
       return res.status(400).send({
-        success: 'false',
-        message: 'field required'
+        status: 400,
+        error: 'field required'
       });
     }
     const acctExist = accountDb.filter(
@@ -27,7 +28,8 @@ export default class Account {
     );
     if (!acctExist.length < 1) {
       return res.status(409).json({
-        message: 'account  already exist'
+        status:409,
+        error: 'account  already exist'
       });
     }
     const data = {
@@ -45,9 +47,7 @@ export default class Account {
     accountDb.push(data);
     return res.status(201).json({
       status: 201,
-      message: 'Account created successfully',
       datas: {
-        date,
         accountNumber,
         firstname,
         lastname,

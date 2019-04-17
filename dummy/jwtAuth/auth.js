@@ -11,8 +11,8 @@ const verifyUser = (req, res, next) => {
 	const token = req.headers['x-access-token'];
 	if (!token) {
 		res.status(301).json({
-			success: false,
-			message: 'authentication failed, please login'
+			status: 301,
+			error: 'authentication failed, please login'
 		});
 	}
 
@@ -20,14 +20,15 @@ const verifyUser = (req, res, next) => {
 		const decoded = jwt.verify(token, secret);
 		if (!decoded) {
 			res.status(401).json({
-				message: 'authentication failed'
+			error: 'authentication failed'
 			});
 		}
 		req.decoded = decoded;
 		next();
 	} catch (error) {
 		res.status(400).json({
-			message: 'invalid token, you are not a valid user'
+			status:400,
+			error: 'invalid token, you are not a valid user'
 		});
 	}
 };

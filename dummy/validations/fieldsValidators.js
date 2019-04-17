@@ -7,7 +7,7 @@ export default class Validator {
        * @param {*} res
        * @param {*} next
        * @param {*} json
-       * @param {*} message
+       * @param {*} error
        */
 
   // VALIDATE MEAL FORM FIELD
@@ -18,60 +18,80 @@ export default class Validator {
     try {
       const regex = /^[a-zA-Z\s]*$/;
       if (firstname.trim() === '') {
-        return res.status(400).json({ message: 'firstname field cannot be empty' });
+        return res.status(400).json({ 
+          status:400,
+          error: 'firstname field cannot be empty' });
       }
       if (!regex.test(firstname)) {
         return res
           .status(400)
-          .json({ message: 'firstname can only be letters' });
+          .json({ 
+            status:400,
+            error: 'firstname can only be letters' });
       }
       if (lastname.trim() === '') {
-        return res.status(400).json({ message: 'lastname cannot be empty' });
+        return res.status(400).json({ 
+          status:400,
+          error: 'lastname cannot be empty' });
       }
       if (!regex.test(lastname)) {
         return res
           .status(400)
-          .json({ message: 'lastname can only be letters' });
+          .json({ 
+            status:400,
+            error: 'lastname can only be letters' });
       }
 
       if (email.trim() === '') {
         return res
           .status(400)
-          .json({ message: 'email cannot be empty' });
+          .json({
+            status:400,
+            error: 'email cannot be empty' });
       }
       if (type.trim() === '') {
         return res
           .status(400)
-          .json({ message: 'type cannot be empty' });
+          .json({ 
+            status:400,
+            error: 'type cannot be empty' });
       }
       if (password.trim() === '') {
         return res
           .status(400)
-          .json({ message: 'password cannot be empty' });
+          .json({ 
+            status:400,
+            error: 'password cannot be empty' });
       }
       if (!regex.test(type)) {
         return res
           .status(400)
-          .json({ message: 'type can only be letters' });
+          .json({
+            status:400,
+             error: 'type can only be letters' });
       }
 
      
       if (isAdmin.trim() === '') {
         return res
           .status(400)
-          .json({ message: 'isAdmin cannot be empty' });
+          .json({ 
+            status:400,
+            error: 'isAdmin cannot be empty' });
       }
 
       if (!regex.test(isAdmin)) {
         return res
           .status(400)
-          .json({ message: 'isAdmin can only be letters' });
+          .json({ 
+            status:400,
+            error: 'isAdmin can only be letters' });
       }
       next();
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        error: 'JSON object should contain { firstname, lastname, email, password,type,isAdmin }'
+        error: 'Please provide these specified fields { firstname, lastname, email, password,type,isAdmin }'
       });
     }
   }
@@ -82,19 +102,23 @@ export default class Validator {
     } = req.body;
     try {
       if (password.trim() === '') {
-        return res.status(400).json({ message: 'password field cannot be empty' });
+        return res.status(400).json({ 
+          status:400,
+          error: 'password field cannot be empty' });
       }
 
       if (email.trim() === '') {
         return res
           .status(400)
-          .json({ message: 'email cannot be empty' });
+          .json({ 
+            status:400,
+            error: 'email cannot be empty' });
       }
       next();
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        error: 'JSON object should contain {  email, password }'
+        error: 'Please provide these specified fields {  email, password }'
       });
     }
   }
@@ -105,7 +129,9 @@ export default class Validator {
     } = req.body;
     try {
       if (acctStatus.trim() === '') {
-        return res.status(400).json({ message: ' acct status field cannot be empty' });
+        return res.status(400).json({ 
+          status:400,
+          error: ' acct status field cannot be empty' });
       }
 
    
@@ -113,7 +139,7 @@ export default class Validator {
     } catch (error) {
       return res.status(400).json({
         status: 400,
-        error: 'JSON object should contain { acctStatus}'
+        error: 'please provide the specified fields { acctStatus}'
       });
     }
   }
