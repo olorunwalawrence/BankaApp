@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/olorunwalawrence/BankaApp.svg?branch=develop)](https://travis-ci.org/olorunwalawrence/BankaApp) [![Coverage Status](https://coveralls.io/repos/github/olorunwalawrence/BankaApp/badge.svg?branch=develop)](https://coveralls.io/github/olorunwalawrence/BankaApp?branch=develop)
+[![Build Status](https://travis-ci.org/olorunwalawrence/BankaApp.svg?branch=develop)](https://travis-ci.org/olorunwalawrence/BankaApp) [![Coverage Status](https://coveralls.io/repos/github/olorunwalawrence/BankaApp/badge.svg?branch=develop)](https://coveralls.io/github/olorunwalawrence/BankaApp?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/c79ef30b7fbac0464d34/maintainability)](https://codeclimate.com/github/olorunwalawrence/BankaApp/maintainability)
 # Banka
 Banka is a light-weight core banking application that powers banking operations like account creation, customer deposit and withdrawals. This app is meant to support a single bank, where users can signup and create bank accounts online, but must visit the branch to withdraw or deposit money..
 
@@ -43,20 +43,19 @@ npm start
 
 Open the postman and test the following existing routes:
 
-
 <table>
     <tr>
         <th>API</th>
         <th>HTTP verb</th>
         <th>Action</th>
     </tr>
-
+    <!-- yet to be implemented -->
     <tr>
         <td>/api/v1/auth/signup</td>
         <td>POST</td>
         <td>Create new user</td>
     </tr>
-
+     <!-- yet to be implemented -->
     <tr>
         <td>/api/v1/auth/login</td>
         <td>POST</td>
