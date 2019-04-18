@@ -13,3 +13,5 @@ export const checkType = (type) => {
 };
 
 export default veryfyAdmin;
+
+

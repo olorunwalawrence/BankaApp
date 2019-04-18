@@ -8,17 +8,23 @@ import transactionDb from '../db/transactionDb';
 export default class AdminFunctionality {
   static ActivatOrDeactivateAccct(req, res) {
     const { isAdmin } = req.decoded;
-
-    if (!verifyAdmin(isAdmin)) {
-      return res.status(400).json({
-        status: 400,
-        error: 'only an admin is alloewd to perform this task'
+    try {
+      if (!verifyAdmin(isAdmin)) {
+        return res.status(400).json({
+          status: 400,
+          error: 'only an admin is allowd to perform this task'
+        });
+      }
+    } catch (error) {
+      res.status(401).json({
+        error: 'pls login login as an admin'
       });
     }
 
+
     let updatedStatus = {};
 
-    
+
     const { accountNumber } = req.params;
     accountDb.forEach((acct) => {
       if (acct.accountNumber === Number(accountNumber)) {
@@ -31,13 +37,13 @@ export default class AdminFunctionality {
         status: 200,
         data: {
           accountNumber,
-           status: updatedStatus.status
+          status: updatedStatus.status
         }
       });
     }
   }
 
-   /**
+  /**
    * ()
    * @desc deletes a account
    * @param {*} req
@@ -60,11 +66,11 @@ export default class AdminFunctionality {
         accountDb.splice(i, 1);
         return res.status(200).json({
           status: 200,
-          error: 'seleted account successfully deleted'
+          message: 'seleted account successfully deleted'
         });
       }
     }
-    return res.status(404).json({ 
+    return res.status(404).json({
       status: 400,
       error: 'The specified account does not exist'
     });
@@ -73,8 +79,8 @@ export default class AdminFunctionality {
   static creaditAccount(req, res) {
     const { firstname, isAdmin, id } = req.decoded;
     const { accountNumber } = req.params;
-     const createdOn = new Date();
-    const { type, amount } = req.body;
+    const createdOn = new Date();
+    const { amount } = req.body;
 
 
     if (!verifyAdmin(isAdmin)) {
@@ -84,13 +90,17 @@ export default class AdminFunctionality {
       });
     }
 
+    const accountFound = accountDb.find(acct => acct.accountNumber === parseInt(accountNumber));
+    if (!accountFound) return false;
+  accountFound.openingBalance = Number(accountFound.openingBalance)
+    accountFound.openingBalance +=  parseInt(amount);
 
     
+      const result = accountFound.openingBalance;
 
     const data = {
       transactionId: shortid.generate(),
       createdOn,
-      type,
       amount,
       cashier: firstname,
     };
@@ -105,19 +115,19 @@ export default class AdminFunctionality {
         transactionId,
         amount,
         accountNumber,
-        cashier:id,
-        transactionType: type,
-        accountBalance: amount
+        cashier: id,
+        // transactionType: type,
+        accountBalance:result
       }
     });
   }
 
   static debitAccount(req, res) {
-    const { firstname, isAdmin, id } = req.decoded;
+    const { isAdmin, id } = req.decoded;
     const { accountNumber } = req.params;
     const createdOn = new Date();
     const {
-      type, amount
+      amount
     } = req.body;
 
     if (!verifyAdmin(isAdmin)) {
@@ -128,6 +138,17 @@ export default class AdminFunctionality {
     }
 
 
+    const accountFound = accountDb.find(acct => acct.accountNumber === parseInt(accountNumber));
+    if (!accountFound) return false;
+    if( accountFound.openingBalance <= amount){
+      accountFound.openingBalance = accountFound.openingBalance;
+    
+    }else{
+      accountFound.openingBalance -=  parseInt(amount);
+    }
+    
+  
+const result = accountFound.openingBalance;
 
     const data = {
       transactionId: shortid.generate(),
@@ -135,22 +156,18 @@ export default class AdminFunctionality {
       amount,
       createdOn,
       cashier: id,
-      transactiontype:type,
-     
-      
     };
-    const {transactionId } = data;
+
 
     transactionDb.push(data);
     return res.status(201).json({
       status: 201,
       data: {
-       transactionId,
+      //  transactionId,
         accountNumber,
         amount,
-        cashier:id,
-        transactionType: type,
-        accountBalance:amount
+        cashier: id,
+        accountBalance:result
       }
     });
   }
