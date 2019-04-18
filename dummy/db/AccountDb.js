@@ -13,6 +13,8 @@ export default [
     createdOn: '17/03/2019',
     status: 'active',
     openingBalance: '20,000000',
+    accountBalance:2000
+    
 
   }
 ];

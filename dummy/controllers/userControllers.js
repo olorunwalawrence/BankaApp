@@ -74,8 +74,8 @@ export default class UserControllers {
   
 
     if (isExist.length < 1) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(404).json({
+        status: 404,
         error: 'user credentials does not exist'
       });
     }
@@ -83,7 +83,7 @@ export default class UserControllers {
 
     if (!pass) {
       return res.status(401).json({
-        status: '404',
+        status: 401,
         error: 'password is incorrect'
       });
     }

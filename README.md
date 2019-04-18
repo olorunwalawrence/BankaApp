@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/olorunwalawrence/BankaApp.svg?branch=develop)](https://travis-ci.org/olorunwalawrence/BankaApp) [![Coverage Status](https://coveralls.io/repos/github/olorunwalawrence/BankaApp/badge.svg?branch=develop)](https://coveralls.io/github/olorunwalawrence/BankaApp?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/c79ef30b7fbac0464d34/maintainability)](https://codeclimate.com/github/olorunwalawrence/BankaApp/maintainability)
+
 # Banka
 Banka is a light-weight core banking application that powers banking operations like account creation, customer deposit and withdrawals. This app is meant to support a single bank, where users can signup and create bank accounts online, but must visit the branch to withdraw or deposit money..
 
@@ -7,7 +8,7 @@ Banka is a light-weight core banking application that powers banking operations 
 
 * This project motivates me  because its a challenges me a lot and its been my goal to be a web application developer
 
-* Banka  web plication is built on JavaScript programming language, an implementation of  markup on the front-end and back-end was adequate.
+* Banka web plication is built on JavaScript programming language, an implementation of html on the front-end and back-end was adequate.
 
 How to use the application
 
@@ -19,8 +20,6 @@ you can create account, view account information, view all transaction history.
 * As an admin, you can create a staff account.
 
 * As an authenticated user, you can log in into your account via the login form provided at the home page. Only an authenticated user can log in otherwise sign up.
-
-visit us at https://olorunwalawrence.github.io/BankaApp/UI on your browser
 
 Programming Stack
 
@@ -42,6 +41,7 @@ this will install all dependencies and dev-dependencies for the project, then ru
 npm start
 
 Open the postman and test the following existing routes:
+visit us at https://olorunwalawrence.github.io/BankaApp/UI on your browser
 
 <table>
     <tr>
