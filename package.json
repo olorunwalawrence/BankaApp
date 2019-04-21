@@ -6,6 +6,8 @@
   "scripts": {
     "start:dev": "nodemon app.js --exec babel-node --",
     "start": "babel-node app.js",
+    "migrate": "babel-node server/models/createtables.js",
+    "unmigrate": "babel-node server/models/undoTable/index.js",
     "test:dev": "  nyc --reporter=html --reporter=text mocha dummy/test --compilers js:babel-core/register --timeout 50000ms --exit",
     "test": "npm run test:dev",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
