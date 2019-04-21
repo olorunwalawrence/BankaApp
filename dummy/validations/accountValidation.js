@@ -64,9 +64,6 @@ export default class Validators {
            error: 'amount cannot be empty' });
       }
      
- 
-
-
       next();
     } catch (error) {
       return res.status(400).json({
