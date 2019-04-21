@@ -2,7 +2,7 @@
 
 import db from '../models/index';
 import account from '../queries/insert';
-// import accountNumbers from '../queries/find';
+import accountNumbers from '../queries/find';
 
 
 const { createAccount } = account;

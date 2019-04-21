@@ -24,7 +24,8 @@ export default class Users {
       firstname,
       lastname,
       email,
-      username
+      username,
+      isAdmin
     } = req.body;
 
 
@@ -34,10 +35,11 @@ export default class Users {
       username,
       email,
       password,
+      isAdmin
     ];
     return db.query(userSignup, userValues).then((newUser) => {
       const { userid } = newUser.rows[0];
-      const token = jwt.sign({ userid,firstname, lastname, email, username  }, secret, { expiresIn: '10h' });
+      const token = jwt.sign({ userid,firstname, lastname, email, username, isAdmin  }, secret, { expiresIn: '10h' });
 
       return res.status(201).json({
         status: 201,

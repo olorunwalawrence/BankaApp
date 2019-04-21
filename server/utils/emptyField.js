@@ -13,7 +13,7 @@ const fieldValidator = (type, args) => {
     }
     if (expectedInputs.length < 5) {
       response.status = 400;
-      response.error = 'firstname, lastname, email, password username are required';
+      response.error = 'firstname, lastname, email, password, username are required';
     }
     return response;
   }
