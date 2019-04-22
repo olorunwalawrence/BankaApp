@@ -1,8 +1,6 @@
 import index from './index';
 import accountTable from './account';
 
-
-
 const print = console;
 
 const signupTable = () => {
@@ -30,8 +28,8 @@ setTimeout(() => {
 setTimeout(() => {
   accountTable().then(() => {
     print.log('account table created succesfully');
+    process.exit();
   }).catch((err) => {
     print.log(err.message);
   });
 }, 3000);
-

@@ -10,4 +10,8 @@ export default {
     const accountModel = 'DROP TABLE IF EXISTS accounts CASCADE;';
     return db.query(accountModel);
   },
+  droptransactionTable() {
+    const transactionModel = 'DROP TABLE IF EXISTS transactions CASCADE;';
+    return db.query(transactionModel);
+  },
 };
