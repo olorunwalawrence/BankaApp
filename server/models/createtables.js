@@ -1,7 +1,6 @@
 import index from './index';
 import accountTable from './account';
-
-
+import transactionTable from './transaction';
 
 const print = console;
 
@@ -35,3 +34,11 @@ setTimeout(() => {
   });
 }, 3000);
 
+setTimeout(() => {
+  transactionTable().then(() => {
+    print.log('transaction table created succesfully');
+    process.exit();
+  }).catch((err) => {
+    print.log(err.message);
+  });
+}, 4000);
