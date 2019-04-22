@@ -49,6 +49,21 @@ const fieldValidator = (type, args) => {
     }
     return response;
   }
+  if (type == 'staff') {
+    for (const input in args) {
+      expectedInputs.push(input);
+      if (args[input].trim() === '') {
+        empty.push(input);
+        response.status = 400;
+        response.error = `${empty} field/s cannot be empty`;
+      }
+    }
+    if (expectedInputs.length < 5) {
+      response.status = 400;
+      response.error = 'firstname, lastname, email, password, username,isStaff are required';
+    }
+    return response;
+  }
 };
 
 export default fieldValidator;

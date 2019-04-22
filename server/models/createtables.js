@@ -2,6 +2,7 @@ import index from './index';
 import accountTable from './account';
 
 
+
 const print = console;
 
 const signupTable = () => {
@@ -16,23 +17,21 @@ const signupTable = () => {
         password VARCHAR(255) NOT NULL,
         isAdmin VARCHAR(255) NOT NULL
         
-        )`;   
+        )`;
   return index.query(userTable);
 };
 
-setTimeout(() =>{
+setTimeout(() => {
   signupTable().then(() => {
     print.log('user table created successfully');
   });
-}, 1000)
+}, 1000);
 
 setTimeout(() => {
   accountTable().then(() => {
     print.log('account table created succesfully');
-    process.exit();
   }).catch((err) => {
     print.log(err.message);
   });
 }, 3000);
-
 

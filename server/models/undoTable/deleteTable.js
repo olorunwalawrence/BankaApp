@@ -10,5 +10,4 @@ export default {
     const accountModel = 'DROP TABLE IF EXISTS accounts CASCADE;';
     return db.query(accountModel);
   },
-
 };
