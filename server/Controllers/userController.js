@@ -3,13 +3,11 @@ import { config } from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import db from '../models/index';
-import insert from '../queries/insert'; 
+import insert from '../queries/insert';
 import find from '../queries/find';
-// import validator from '../validator/inputValidator';
 
 const { userSignup } = insert;
 const { findbyemail } = find;
-
 
 
 config();
@@ -39,7 +37,9 @@ export default class Users {
     ];
     return db.query(userSignup, userValues).then((newUser) => {
       const { userid } = newUser.rows[0];
-      const token = jwt.sign({ userid,firstname, lastname, email, username, isAdmin  }, secret, { expiresIn: '10h' });
+      const token = jwt.sign({
+        userid, firstname, lastname, email, username, isAdmin
+      }, secret, { expiresIn: '10h' });
 
       return res.status(201).json({
         status: 201,
@@ -55,6 +55,7 @@ export default class Users {
     });
   }
 
+  
   // user login
   static userLogin(req, res) {
     const { email, password } = req.body;

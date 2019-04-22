@@ -6,6 +6,7 @@ class Validator {
     this.signupValidator = this.signupValidator.bind(this);
     this.loginValidator = this.loginValidator.bind(this);
     this.accountValidator = this.accountValidator.bind(this);
+    this.staffValidator = this.staffValidator.bind(this);
   }
 
   signupValidator(req, res, next) {
@@ -37,6 +38,19 @@ class Validator {
 
   accountValidator(req, res, next) {
     const emptyFields = fieldValidator.call(this.accountValidator, 'account', req.body);
+    if (emptyFields.status === 400) {
+      return res
+        .status(400)
+        .json({
+          status: 400,
+          error: emptyFields.error
+        });
+    }
+    next();
+  }
+
+  staffValidator(req, res, next) {
+    const emptyFields = fieldValidator.call(this.staffValidator, 'staff', req.body);
     if (emptyFields.status === 400) {
       return res
         .status(400)

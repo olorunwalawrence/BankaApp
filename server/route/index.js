@@ -12,13 +12,13 @@ const { createAccount } = account;
 
 const { exitingUsername, existingEmail  } = findExisting;
 const { signupValidator, loginValidator, accountValidator } = validator;
-const { ActivatOrDeactivateAccct, deleteAccount } = adminController;
+const { ActivatOrDeactivateAccct, deleteAccount, creaditAccount } = adminController;
 
 router.post('/auth/signup', signupValidator, existingEmail, exitingUsername, createUser);
 router.post('/auth/login', loginValidator, userLogin);
 router.post('/accounts', accountValidator , verifyUser, createAccount);
 router.patch('/account/:accountNumber', verifyUser, ActivatOrDeactivateAccct);
 router.delete('/account/:accountNumber', verifyUser, deleteAccount);
+router.post('/transactions/:accountNumber/credit', creaditAccount);
 
 export default router;
-

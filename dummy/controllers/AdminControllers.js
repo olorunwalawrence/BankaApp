@@ -117,7 +117,7 @@ export default class AdminFunctionality {
         accountNumber,
         cashier: id,
         // transactionType: type,
-        accountBalance:result
+        accountBalance: result
       }
     });
   }
