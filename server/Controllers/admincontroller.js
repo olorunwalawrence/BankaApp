@@ -1,6 +1,5 @@
 /* eslint-disable require-jsdoc */
 import verifyAdmin from '../helpers/isAdmin';
-import { verifyStaff } from '../helpers/isAdmin';
 
 import db from '../models/index';
 import updateAccount from '../queries/update';
@@ -81,67 +80,4 @@ export default class AdminFunctionality {
     }));
   }
 
-  static staffAccount(req, res) {
-    
-  }
-
-  static creaditAccount(req, res) {
-    const {} = req.decoded;
-    const { accountNumber } = req.params;
-    const createdOn = new Date();
-    const { amount } = req.body;
-    let accountValues = {};
-
-
-    const acctValue = [
-      accountNumber
-    ];
-
-    db.query(findByAccountNumber, acctValue).then((accountFound) => {
-      accountValues = accountFound.rows[0];
-    });
-
-
-    // const transactionValues = [
-    //   staffid,
-    //   amount,
-    //   accountnumber,
-    //   balance,
-    //   accountid
-    // ]
-
-    // const accountFound = db.query().then(() =>{
-
-    // })
-    //   acct => acct.accountNumber === parseInt(accountNumber));
-    //   if (!accountFound) return false;
-    // accountFound.openingBalance = Number(accountFound.openingBalance)
-    //   accountFound.openingBalance +=  parseInt(amount);
-
-
-    // const result = accountFound.openingBalance;
-
-    // const data = {
-    //   transactionId: shortid.generate(),
-    //   createdOn,
-    //   amount,
-    //   cashier: firstname,
-    // };
-    // const { transactionId } = data;
-
-    // transactionDb.push(data);
-
-    // return res.status(201).json({
-    //   status: 201,
-
-    //   data: {
-    //     transactionId,
-    //     amount,
-    //     accountNumber,
-    //     cashier: id,
-    //     // transactionType: type,
-    //     accountBalance:result
-    //   }
-    // });
-  }
 }
