@@ -1,15 +1,17 @@
 /* eslint-disable require-jsdoc */
+import bcrypt from 'bcrypt';
 import verifyAdmin from '../helpers/isAdmin';
-
+import { verifyStaff } from '../helpers/isAdmin';
 import db from '../models/index';
 import updateAccount from '../queries/update';
 import deleteAccounts from '../queries/delete';
 import findAccount from '../queries/find';
+import createAdmin from '../queries/insert';
 
 const { activateOrDeactivateAcct } = updateAccount;
 const { deleteAccount } = deleteAccounts;
 const { findByAccountNumber, findByAccountNumbers } = findAccount;
-
+const { adminSignup } = createAdmin;
 
 export default class AdminFunctionality {
   static ActivatOrDeactivateAccct(req, res) {
@@ -80,4 +82,83 @@ export default class AdminFunctionality {
     }));
   }
 
+  static staffAccount(req, res) {
+
+  }
+
+  static creaditAccount(req, res) {
+    const {} = req.decoded;
+    const { accountNumber } = req.params;
+    const createdOn = new Date();
+    const { amount } = req.body;
+    let accountValues = {};
+
+
+    const acctValue = [
+      accountNumber
+    ];
+
+    db.query(findByAccountNumber, acctValue).then((accountFound) => {
+      accountValues = accountFound.rows[0];
+    });
+
+
+    // const transactionValues = [
+    //   staffid,
+    //   amount,
+    //   accountnumber,
+    //   balance,
+    //   accountid
+    // ]
+
+    // const accountFound = db.query().then(() =>{
+
+    // })
+    //   acct => acct.accountNumber === parseInt(accountNumber));
+    //   if (!accountFound) return false;
+    // accountFound.openingBalance = Number(accountFound.openingBalance)
+    //   accountFound.openingBalance +=  parseInt(amount);
+
+
+    // const result = accountFound.openingBalance;
+
+    // const data = {
+    //   transactionId: shortid.generate(),
+    //   createdOn,
+    //   amount,
+    //   cashier: firstname,
+    // };
+    // const { transactionId } = data;
+
+    // transactionDb.push(data);
+
+    // return res.status(201).json({
+    //   status: 201,
+
+    //   data: {
+    //     transactionId,
+    //     amount,
+    //     accountNumber,
+    //     cashier: id,
+    //     // transactionType: type,
+    //     accountBalance:result
+    //   }
+    // });
+  }
+
+  static createAdminAccount(req, res) {
+    const adminDetails = {
+      firstname: 'Olorunwa',
+      lastname: 'Lawrence',
+      email: process.env.EMAIL,
+      username: 'OlorunwaLaw',
+      isAdmin: verifyAdmin('yes'),
+      password: bcrypt.hashSync(process.env.PASSCODE, 10)
+    };
+    const {
+      firstname, lastname, username, email, password, isAdmin
+    } = adminDetails;
+    const userValues = [firstname, lastname, username, email, password, isAdmin];
+    return db.query(adminSignup, userValues).then().catch(err => console.log(err));
+  }
 }

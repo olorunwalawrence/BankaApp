@@ -17,13 +17,12 @@ export default class Users {
   // eslint-disable-next-line require-jsdoc
   static createUser(req, res) {
     const password = bcrypt.hashSync(req.body.password, 10);
-
+    const isAdmin = false;
     const {
       firstname,
       lastname,
       email,
       username,
-      isAdmin
     } = req.body;
 
 
@@ -49,13 +48,13 @@ export default class Users {
           firstname,
           lastname,
           email,
-          password
+          isAdmin
         }
       });
     });
   }
 
-  
+
   // user login
   static userLogin(req, res) {
     const { email, password } = req.body;
@@ -63,12 +62,22 @@ export default class Users {
 
     db.query(findbyemail, userEmail).then((user) => {
       if (user.rows[0] && bcrypt.compareSync(password.trim(), user.rows[0].password)) {
-        const { userid, username } = user.rows[0];
+        const { userid, username, firstname, lastname, isadmin } = user.rows[0];
+        const isAdmin = isadmin === 'true';
 
-        const token = jwt.sign({ userid, email, username }, secret, { expiresIn: '10h' });
+        const token = jwt.sign({
+          userid, email, username, isAdmin
+        }, secret, { expiresIn: '10h' });
         return res.status(200).json({
           status: 200,
-          data: { username, email, token }
+          data: {
+            token,
+            firstname,
+            lastname,
+            username,
+            email,
+            isAdmin
+          }
         });
       }
       return res.status(400).json({
