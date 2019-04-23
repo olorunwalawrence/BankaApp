@@ -16,16 +16,20 @@ export default class Account {
     const accountNumber = Math.floor(Math.random() * 10000000000);
     const date = new Date();
     const status = 'active';
-
-
-
     const {
       type, openingBalance
     } = req.body;
-
+    if (typeof openingBalance !== 'number' || openingBalance < 0) {
+      return res.status(400).json({
+        status: 400,
+        error: 'please enter valid number for openingBalance or openingBalance greater than zero'
+      });
+    }
+    const currentbalance = openingBalance;
     const accountvalue = [
       type,
       openingBalance,
+      currentbalance,
       firstname,
       lastname,
       username,
@@ -34,8 +38,6 @@ export default class Account {
       status,
       userid
     ];
-
-
     db.query(createAccount, accountvalue).then(newAcct => res.status(201).json({
       status: 201,
       data: {
@@ -51,6 +53,5 @@ export default class Account {
         error
       });
     });
-
   }
 }

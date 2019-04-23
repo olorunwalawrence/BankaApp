@@ -11,16 +11,20 @@ const router = express.Router();
 const { createUser, userLogin } = user;
 const { createAccount } = account;
 const { viewHistory, viewAtransaction } = transactions;
-const { exitingUsername, existingEmail  } = findExisting;
+const { exitingUsername, existingEmail } = findExisting;
 const { signupValidator, loginValidator, accountValidator } = validator;
-const { ActivatOrDeactivateAccct, deleteAccount, creaditAccount } = adminController;
+const {
+  ActivatOrDeactivateAccct, deleteAccount, creaditAccount, debitAccount, adminUpdateUserRole
+} = adminController;
 
 router.post('/auth/signup', signupValidator, existingEmail, exitingUsername, createUser);
 router.post('/auth/login', loginValidator, userLogin);
-router.post('/accounts', accountValidator , verifyUser, createAccount);
+router.post('/accounts', accountValidator, verifyUser, createAccount);
 router.patch('/account/:accountNumber', verifyUser, ActivatOrDeactivateAccct);
 router.delete('/account/:accountNumber', verifyUser, deleteAccount);
-// router.post('/transactions/:accountNumber/credit', creaditAccount);
-router.get('/accounts/:accountNumber/transactions', viewHistory);
-router.get('/transactions/:transactionid', viewHistory);
+router.post('/transactions/:accountNumber/credit', verifyUser, creaditAccount);
+router.post('/transactions/:accountNumber/debit', verifyUser, debitAccount);
+router.get('/accounts/:accountnumber/transactions', verifyUser, viewHistory);
+router.get('/transactions/:transactionid', verifyUser, viewHistory);
+router.put('/update/user/:id', verifyUser, adminUpdateUserRole);
 export default router;

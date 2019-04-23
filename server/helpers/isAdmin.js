@@ -2,20 +2,12 @@
 
 // eslint-disable-next-line no-undef
 
-const veryfyAdmin = (isAdmin) => {
-  const confirm = isAdmin.trim().toLowerCase() === 'yes';
+export const verifyAdmin = (isAdmin) => {
+  const confirm = typeof isAdmin === 'boolean' ? isAdmin.toString() : isAdmin === 'true';
   return confirm;
 };
 
-export const veryfyStaff = (isStaff) => {
-  const confirm = isStaff.trim().toLowerCase() === 'yes';
+export const verifyStaff = (isStaff) => {
+  const confirm = typeof isStaff === 'boolean' ? isStaff.toString() : isStaff === 'true';
   return confirm;
 };
-
-export const checkType = (type) => {
-  const param = type.trim().toLowerCase();
-  if (param !== 'client' || param !== 'staff') return true;
-};
-
-export default veryfyAdmin;
-
