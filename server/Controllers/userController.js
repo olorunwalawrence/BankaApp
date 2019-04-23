@@ -62,11 +62,13 @@ export default class Users {
 
     db.query(findbyemail, userEmail).then((user) => {
       if (user.rows[0] && bcrypt.compareSync(password.trim(), user.rows[0].password)) {
-        const { userid, username, firstname, lastname, isadmin } = user.rows[0];
+        const {
+          userid, username, firstname, lastname, isadmin, staff
+        } = user.rows[0];
         const isAdmin = isadmin === 'true';
 
         const token = jwt.sign({
-          userid, email, username, isAdmin
+          userid, email, username, isAdmin, staff
         }, secret, { expiresIn: '10h' });
         return res.status(200).json({
           status: 200,

@@ -1,3 +1,4 @@
+/* eslint-disable */
 const fieldValidator = (type, args) => {
   const expectedInputs = [];
   const empty = [];
@@ -37,10 +38,13 @@ const fieldValidator = (type, args) => {
   if (type == 'account') {
     for (const input in args) {
       expectedInputs.push(input);
-      if (args[input].trim() === '') {
-        empty.push(input);
-        response.status = 400;
-        response.error = `${empty} field/s cannot be empty`;
+      const inputField = args[input];
+      if (typeof inputField === 'string') {
+        if (args[input].trim() === '') {
+          empty.push(input);
+          response.status = 400;
+          response.error = `${empty} field/s cannot be empty`;
+        }
       }
     }
     if (expectedInputs.length < 2) {
