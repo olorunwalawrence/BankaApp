@@ -3,15 +3,15 @@ import bcrypt from 'bcrypt';
 import { verifyStaff, verifyAdmin } from '../helpers/isAdmin';
 import db from '../models/index';
 import updateAccount from '../queries/update';
-import deleteAccounts from '../queries/delete';
+import Delete from '../queries/delete';
 import find from '../queries/find';
 import create from '../queries/insert';
 
 const { activateOrDeactivateAcct, updateRole, updateBal } = updateAccount;
-const { deleteAccount } = deleteAccounts;
+
 const { findByAccountNumber, findbyId } = find;
 const { adminSignup, creditAccount } = create;
-
+const { deleteAccount } = Delete;
 export default class AdminFunctionality {
   static ActivatOrDeactivateAccct(req, res) {
     const { isAdmin } = req.decoded;
@@ -53,32 +53,38 @@ export default class AdminFunctionality {
     }
   }
 
-  static deleteAccount(req, res) {
-    let accountFound;
+  static deleteAccounts(req, res) {
+    const { isAdmin } = req.decoded;
     const { accountNumber } = req.params;
-    db.query(findByAccountNumber, [accountNumber]).then((acctNum) => {
-      accountFound = acctNum.rows[0].accountnumber;
-    }).catch(error => res.status(500).json({
-      status: 500,
-      error: error.message
-    }));
 
-    if ([accountFound].length < 1) {
+    try {
+      if (!verifyAdmin(isAdmin)) {
+        return res.status(400).json({
+          status: 400,
+          error: 'only an admin is allowd to perform this task'
+        });
+      }
+
+      db.query(findByAccountNumber, [accountNumber]).then((accts) => {
+        const accounts = accts.rows[0];
+        if ( accounts ) {
+          db.query(deleteAccount, [accountNumber]);
+         return res.status(200).json({
+            status: 200,
+            message: 'the selected account  is deleted succesfully',
+          })
+        }
+        return res.status(400).json({
+          status: 400,
+          error: 'account not found'
+        });
+      });
+    } catch (error) {
       return res.status(400).json({
         status: 400,
-        error: 'the specified account does not exist'
+        error: error.message
       });
     }
-    db.query(deleteAccount, [accountNumber]).then((del) => {
-      res.status(200).json({
-        status: 200,
-        message: 'the selected account  is deleted succesfully',
-        data: del
-      });
-    }).catch(err => res.status(500).json({
-      status: 500,
-      error: err.message
-    }));
   }
 
   static async creaditAccount(req, res) {

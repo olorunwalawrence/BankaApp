@@ -7,6 +7,7 @@ import accountNumbers from '../queries/find';
 
 const { createAccount } = account;
 
+
 export default class Account {
   static createAccount(req, res) {
     const {
@@ -54,4 +55,26 @@ export default class Account {
       });
     });
   }
+
+  // static deleteAccount(req, res) {
+  //   const { accountNumber } = req.params;
+
+
+  //   const value = [
+  //     accountNumber
+  //   ];
+
+  //   db.query(deleteAccount, value).then((account) => {
+  //     return res.status(200).json({
+  //       status: 200,
+  //       message: 'the selected account/s deleted successfully'
+  //     });
+
+  //   }).catch((error) => {
+  //     res.status(200).json({
+  //       status: 500,
+  //       error
+  //     });
+  //   });
+  // }
 }
