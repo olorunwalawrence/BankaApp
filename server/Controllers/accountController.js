@@ -6,7 +6,7 @@ import find from '../queries/find';
 
 
 const { createAccount } = account;
-
+const { findByAccountNumber } = find;
 
 export default class Account {
   static createAccount(req, res) {
@@ -57,4 +57,21 @@ export default class Account {
     });
   }
 
+  static viewAspecificAccountDetails(req,res) {
+    const { accountNumber } = req.params;
+
+    const values = [
+     accountNumber
+    ];
+
+    db.query(findByAccountNumber, values).then(accts => res.status(200).json({
+      status: 200,
+      data: accts.rows[0]
+    })).catch((error) => {
+      res.status(500).json({
+        status: 500,
+        error: error.message
+      });
+    });
+  }
 }
