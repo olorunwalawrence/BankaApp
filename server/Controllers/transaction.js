@@ -1,34 +1,33 @@
 /* eslint-disable require-jsdoc */
 
 import db from '../models/index';
-import accountHistories from '../queries/find';
+import find from '../queries/find';
 
-const { accountHistory } = accountHistories;
+const { findAllTransactionByaccount } = find;
 
 export default class transaction {
-  static viewHistory(req, res) {
-    const { accountNumber } = req.params;
 
-    const values = [
-      accountNumber
-    ];
-    // db.query(accountHistory, values).then((acct) => {
-    //   console.log(acct.rows[0].accountnumber);
-    // }).catch((err) => {
-    //   res.status(500).json({
-    //     status: 500,
-    //     error: err.message
-    //   });
-    // });
-    db.query(accountHistory, values).then(transactions => res.status(200).json({
-      status: 200,
-      data: transactions.rows
-    })).catch((error) => {
-      res.status(500).json({
-        status: 500,
-        error: error.message
-      });
-    });
+  static getAllTransaction(req, res) {
+    const { accountnumber } = req.params;
+try{
+
+  db.query(findAllTransactionByaccount, [accountnumber]).then((trans) => {
+     return res.status(200).json({
+        status:200,
+        data: trans.rows
+      })
+  }).catch(error =>{
+  return  res.status(500).json({
+      status:500,
+      error:error
+    })
+  });
+}catch(error) {
+  return res.status(500).json({
+    status:500,
+    error:'account not found'
+  })
+}
   }
 
   static viewAtransaction(req,res) {

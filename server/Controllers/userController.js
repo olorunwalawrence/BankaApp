@@ -68,7 +68,7 @@ export default class Users {
         const isAdmin = isadmin === 'true';
 
         const token = jwt.sign({
-          userid, email, username, isAdmin, staff
+          userid, firstname, lastname, email, username, isAdmin, staff
         }, secret, { expiresIn: '10h' });
         return res.status(200).json({
           status: 200,

@@ -1,18 +1,26 @@
 /* eslint-disable */
 const fieldValidator = (type, args) => {
-  const expectedInputs = [];
+  const inputFieldCount = [];
   const empty = [];
   const response = {};
   if (type == 'signup') {
+    const expectedInput = ['firstname', 'lastname', 'email', 'password', 'username'];
     for (const input in args) {
-      expectedInputs.push(input);
-      if (args[input].trim() === '') {
-        empty.push(input);
+      inputFieldCount.push(input);
+      if (typeof inputField === 'string') {
+        if (args[input].trim() === '') {
+          empty.push(input);
+          response.status = 400;
+          response.error = `${empty} field/s cannot be empty`;
+        }
+      }
+      if (!expectedInput.includes(input)) {
+          empty.push(input);
         response.status = 400;
-        response.error = `${empty} field/s cannot be empty`;
+        response.error = `${empty} are not expected in signup`
       }
     }
-    if (expectedInputs.length < 5) {
+    if (inputFieldCount.length < expectedInput.length) {
       response.status = 400;
       response.error = 'firstname, lastname, email, password, username are required';
     }
@@ -21,23 +29,32 @@ const fieldValidator = (type, args) => {
 
 
   if (type == 'login') {
+    const expectedInput = ['email', 'password'];
     for (const input in args) {
-      expectedInputs.push(input);
-      if (args[input].trim() === '') {
+      inputFieldCount.push(input);
+      if (typeof inputField === 'string') {
+        if (args[input].trim() === '') {
+          empty.push(input);
+          response.status = 400;
+          response.error = `${empty} field/s cannot be empty`;
+        }
+      }
+      if (!expectedInput.includes(input)) {
         empty.push(input);
         response.status = 400;
-        response.error = `${empty} field/s cannot be empty`;
+        response.error = `${empty} are not expected in login`
       }
     }
-    if (expectedInputs.length < 2) {
+    if (inputFieldCount.length < expectedInput.length) {
       response.status = 400;
       response.error = 'email, password are required';
     }
     return response;
   }
   if (type == 'account') {
+    const expectedInput = ['openingBalance', 'type'];
     for (const input in args) {
-      expectedInputs.push(input);
+      inputFieldCount.push(input);
       const inputField = args[input];
       if (typeof inputField === 'string') {
         if (args[input].trim() === '') {
@@ -46,8 +63,13 @@ const fieldValidator = (type, args) => {
           response.error = `${empty} field/s cannot be empty`;
         }
       }
+      if (!expectedInput.includes(input)) {
+        empty.push(input);
+        response.status = 400;
+        response.error = `${empty} are not account creation request`
+      }
     }
-    if (expectedInputs.length < 2) {
+    if (inputFieldCount.length < 2) {
       response.status = 400;
       response.error = 'openingBalance, type are required';
     }
@@ -55,14 +77,16 @@ const fieldValidator = (type, args) => {
   }
   if (type == 'staff') {
     for (const input in args) {
-      expectedInputs.push(input);
-      if (args[input].trim() === '') {
-        empty.push(input);
-        response.status = 400;
-        response.error = `${empty} field/s cannot be empty`;
+      inputFieldCount.push(input);
+      if (typeof inputField === 'string') {
+        if (args[input].trim() === '') {
+          empty.push(input);
+          response.status = 400;
+          response.error = `${empty} field/s cannot be empty`;
+        }
       }
     }
-    if (expectedInputs.length < 5) {
+    if (inputFieldCount.length < 5) {
       response.status = 400;
       response.error = 'firstname, lastname, email, password, username,isStaff are required';
     }
