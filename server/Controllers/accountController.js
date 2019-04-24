@@ -3,10 +3,10 @@
 import db from '../models/index';
 import account from '../queries/insert';
 import find from '../queries/find';
-
+import { verifyStaff, verifyAdmin } from '../helpers/isAdmin';
 
 const { createAccount } = account;
-const { findByAccountNumber } = find;
+const { findAccountByemail , findByAccountNumber } = find;
 
 export default class Account {
   static createAccount(req, res) {
@@ -57,11 +57,11 @@ export default class Account {
     });
   }
 
-  static viewAspecificAccountDetails(req,res) {
+  static viewAspecificAccountDetails(req, res) {
     const { accountNumber } = req.params;
 
     const values = [
-     accountNumber
+      accountNumber
     ];
 
     db.query(findByAccountNumber, values).then(accts => res.status(200).json({
@@ -74,4 +74,35 @@ export default class Account {
       });
     });
   }
+
+  static adminStaffViewAccount(req, res) {
+
+    const { isAdmin, Staff } = req.decoded;
+    // console.log(req.decoded)
+
+    // if (!verifyAdmin(isAdmin)) {
+    //   return res.status(400).json({
+    //     status: 400,
+    //     error: 'only an admin  or staff is allowd to perform this task'
+    //   });
+    // }
+
+    const { email } = req.params;
+
+    const values = [
+      email
+    ];
+
+    db.query(findAccountByemail, values).then(accts => res.status(200).json({
+      status: 200,
+      data: accts.rows[0]
+    })).catch((error) => {
+      res.status(500).json({
+        status: 500,
+        error: error.message
+      });
+    });
+  }
+
+  
 }

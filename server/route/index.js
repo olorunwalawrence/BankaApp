@@ -9,7 +9,7 @@ import transactions from '../Controllers/transaction';
 
 const router = express.Router();
 const { createUser, userLogin } = user;
-const { createAccount, viewAspecificAccountDetails } = account;
+const { createAccount, viewAspecificAccountDetails, adminStaffViewAccount } = account;
 const { getAllTransaction, viewAtransaction } = transactions;
 const { exitingUsername, existingEmail } = findExisting;
 const { signupValidator, loginValidator, accountValidator } = validator;
@@ -18,14 +18,16 @@ const {
 } = adminController;
 
 router.post('/auth/signup', signupValidator, existingEmail, exitingUsername, createUser);
+router.put('/update/user/:id', verifyUser, adminUpdateUserRole);
 router.post('/auth/login', loginValidator, userLogin);
 router.post('/accounts', accountValidator, verifyUser, createAccount);
 router.patch('/account/:accountNumber', verifyUser, ActivatOrDeactivateAccct);
 router.delete('/account/:accountNumber', verifyUser, deleteAccounts);
-router.get('/accounts/:accountNumber', verifyUser, viewAspecificAccountDetails);
 router.post('/transactions/:accountNumber/credit', verifyUser, creaditAccount);
 router.post('/transactions/:accountNumber/debit', verifyUser, debitAccount);
 router.get('/accounts/:accountnumber/transactions', verifyUser,getAllTransaction );
 router.get('/transactions/:transactionid', verifyUser, viewAtransaction);
-router.put('/update/user/:id', verifyUser, adminUpdateUserRole);
+router.get('/accounts/:accountNumber', verifyUser, viewAspecificAccountDetails);
+router.get('/user/:email/accounts', verifyUser, adminStaffViewAccount);
+
 export default router;
