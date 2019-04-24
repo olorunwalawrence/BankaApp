@@ -133,7 +133,7 @@ export default class AdminFunctionality {
           amount,
           balance: updatedBalance.balance,
           cashierid,
-          transactionType: data.type
+          transactionType: user.type
         }
       });
     }
