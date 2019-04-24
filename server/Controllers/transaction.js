@@ -3,7 +3,7 @@
 import db from '../models/index';
 import find from '../queries/find';
 
-const { findAllTransactionByaccount } = find;
+const { findAllTransactionByaccount,findAspecificTransaction } = find;
 
 export default class transaction {
 
@@ -37,9 +37,9 @@ try{
       transactionid
     ];
 
-    db.query(accountHistory, values).then(transactions => res.status(200).json({
+    db.query(findAspecificTransaction, values).then(transactions => res.status(200).json({
       status: 200,
-      data: transactions.rows[0]
+      data: transactions.rows
     })).catch((error) => {
       res.status(500).json({
         status: 500,
