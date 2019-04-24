@@ -10,7 +10,7 @@ import transactions from '../Controllers/transaction';
 const router = express.Router();
 const { createUser, userLogin } = user;
 const { createAccount } = account;
-const { getAllTransaction } = transactions;
+const { getAllTransaction, viewAtransaction } = transactions;
 const { exitingUsername, existingEmail } = findExisting;
 const { signupValidator, loginValidator, accountValidator } = validator;
 const {
@@ -25,6 +25,6 @@ router.delete('/account/:accountNumber', verifyUser, deleteAccounts);
 router.post('/transactions/:accountNumber/credit', verifyUser, creaditAccount);
 router.post('/transactions/:accountNumber/debit', verifyUser, debitAccount);
 router.get('/accounts/:accountnumber/transactions', verifyUser,getAllTransaction );
-// router.get('/transactions/:transactionid', verifyUser, getAllTransaction);
+router.get('/transactions/:transactionid', verifyUser, viewAtransaction);
 router.put('/update/user/:id', verifyUser, adminUpdateUserRole);
 export default router;

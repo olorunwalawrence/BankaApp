@@ -4,7 +4,8 @@ const find = {
   findbyId: 'SELECT * FROM users WHERE userid = $1 LIMIT 1;',
   findByUsername: 'SELECT * FROM users WHERE username = $1 LIMIT 1;',
   findByAccountNumber: 'SELECT * FROM accounts WHERE accountnumber = $1 LIMIT 1;',
-  findAllTransactionByaccount: 'SELECT * FROM transactions WHERE accountnumber = $1 LIMIT 100 '
+  findAllTransactionByaccount: 'SELECT * FROM transactions WHERE accountnumber = $1 LIMIT 100 ',
+  findAspecificTransaction: 'SELECT * FROM transactions WHERE transactionid = $1 LIMIT 100 '
 };
 
 export default find;
