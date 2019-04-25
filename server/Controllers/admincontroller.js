@@ -1,5 +1,5 @@
 /* eslint-disable require-jsdoc */
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { verifyStaff, verifyAdmin } from '../helpers/isAdmin';
 import db from '../models/index';
 import updateAccount from '../queries/update';
