@@ -18,6 +18,7 @@ export default class Users {
   static createUser(req, res) {
     const password = bcrypt.hashSync(req.body.password, 10);
     const isAdmin = false;
+    const staff = false;
     const {
       firstname,
       lastname,
@@ -32,18 +33,20 @@ export default class Users {
       username,
       email,
       password,
-      isAdmin
+      isAdmin,
+      staff
     ];
     return db.query(userSignup, userValues).then((newUser) => {
       const { userid } = newUser.rows[0];
+      
       const token = jwt.sign({
-        userid, firstname, lastname, email, username, isAdmin
+        userid, firstname, lastname, email, username, isAdmin, staff
       }, secret, { expiresIn: '10h' });
 
       return res.status(201).json({
         status: 201,
         data: {
-          token,
+          token:`Bearer ${token}`,
           userid,
           firstname,
           lastname,
@@ -66,14 +69,14 @@ export default class Users {
           userid, username, firstname, lastname, isadmin, staff
         } = user.rows[0];
         const isAdmin = isadmin === 'true';
-
+        const isStaff = staff === 'true';
         const token = jwt.sign({
-          userid, firstname, lastname, email, username, isAdmin, staff
+          userid, firstname, lastname, email, username, isAdmin, isStaff
         }, secret, { expiresIn: '10h' });
         return res.status(200).json({
           status: 200,
           data: {
-            token,
+            token:`Bearer ${token}`,
             firstname,
             lastname,
             username,

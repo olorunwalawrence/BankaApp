@@ -6,7 +6,9 @@ import find from '../queries/find';
 import { verifyStaff, verifyAdmin } from '../helpers/isAdmin';
 
 const { createAccount } = account;
-const { findAccountByemail , findByAccountNumber } = find;
+const {
+  findAccountByemail, findByAccountNumber, getallAccounts, findAccountByStatus
+} = find;
 
 export default class Account {
   static createAccount(req, res) {
@@ -21,6 +23,12 @@ export default class Account {
     const {
       type, openingBalance
     } = req.body;
+    if (type !== 'savings' && type !== 'current') {
+      return res.status(400).json({
+        status: 400,
+        error: 'only savings and current is allowed is the account type'
+      });
+    }
     if (typeof openingBalance !== 'number' || openingBalance < 0) {
       return res.status(400).json({
         status: 400,
@@ -46,13 +54,14 @@ export default class Account {
         accountNumber,
         createdOn: date,
         owner: userid,
-        type: status,
+        status,
+        type,
         balance: openingBalance
       }
     })).catch((error) => {
-      res.status(500).json({
-        status: 500,
-        error
+      res.status(400).json({
+        status: 400,
+        error: error.detail
       });
     });
   }
@@ -64,10 +73,18 @@ export default class Account {
       accountNumber
     ];
 
-    db.query(findByAccountNumber, values).then(accts => res.status(200).json({
-      status: 200,
-      data: accts.rows[0]
-    })).catch((error) => {
+    db.query(findByAccountNumber, values).then((accts) => {
+      if (accts.rows.length < 1) {
+        return res.status(404).json({
+          status: 404,
+          error: `this account number ${accountNumber} is incorrect and connot be found`
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: accts.rows
+      });
+    }).catch((error) => {
       res.status(500).json({
         status: 500,
         error: error.message
@@ -76,33 +93,92 @@ export default class Account {
   }
 
   static adminStaffViewAccount(req, res) {
-
-    const { isAdmin, Staff } = req.decoded;
-    // console.log(req.decoded)
-
-    // if (!verifyAdmin(isAdmin)) {
-    //   return res.status(400).json({
-    //     status: 400,
-    //     error: 'only an admin  or staff is allowd to perform this task'
-    //   });
-    // }
-
+    const { isAdmin, isStaff } = req.decoded;
     const { email } = req.params;
 
     const values = [
       email
     ];
+    const admin = verifyAdmin(isAdmin);
+    const staff = verifyStaff(isStaff);
 
-    db.query(findAccountByemail, values).then(accts => res.status(200).json({
-      status: 200,
-      data: accts.rows[0]
-    })).catch((error) => {
-      res.status(500).json({
-        status: 500,
-        error: error.message
+    if (admin || staff) {
+      return db.query(findAccountByemail, values).then((accts) => {
+        if (accts.rows.length < 1) {
+          return res.status(404).json({
+            status: 404,
+            error: 'No account found'
+          });
+        }
+        return res.status(200).json({
+          status: 200,
+          data: accts.rows
+        });
+      }).catch((error) => {
+        res.status(500).json({
+          status: 500,
+          error: error.message
+        });
       });
-    });
+    }
   }
 
-  
+  static adminStaffViewAllAccount(req, res) {
+    const { isAdmin, isStaff } = req.decoded;
+    const admin = verifyAdmin(isAdmin);
+    const staff = verifyStaff(isStaff);
+
+    if (admin || staff) {
+      return db.query(getallAccounts).then((accts) => {
+        if (accts.rows.length < 1) {
+          return res.status(404).json({
+            status: 404,
+            error: 'No account found'
+          });
+        }
+        return res.status(200).json({
+          status: 200,
+          data: accts.rows
+        });
+      }).catch((error) => {
+        res.status(500).json({
+          status: 500,
+          error: error.message
+        });
+      });
+    }
+  }
+
+
+  static adminStaffViewAccountByStatus(req, res) {
+    const { isAdmin, isStaff } = req.decoded;
+    const admin = verifyAdmin(isAdmin);
+    const staff = verifyStaff(isStaff);
+    const { status } = req.query;
+    const value = [
+      status
+    ];
+
+    if (admin || staff) {
+      return db.query(findAccountByStatus, value).then((accts) => {
+        if (accts.rows.length < 1) {
+          return res.status(404).json({
+            status: 404,
+            error: 'No such account account found'
+          });
+        }
+        return res.status(200).json({
+          status: 200,
+          data: accts.rows
+        });
+      }).catch(error => res.status(500).json({
+        status: 500,
+        error: error.message
+      }));
+    }
+    return res.status(400).json({
+      status: 400,
+      error: 'only an admin  or staff is allowd to perform this task'
+    });
+  }
 }

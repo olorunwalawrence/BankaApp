@@ -1,14 +1,20 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import passport from 'passport';
+import cors from 'cors';
 import route from './server/route/index';
+import passportAuth from './server/middleware/passport';
 
 const app = express();
 
 const print = console;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
+passportAuth(passport);
 
 app.use('/api/v1', route);
 
