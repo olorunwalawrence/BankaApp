@@ -54,31 +54,32 @@ export default class AdminFunctionality {
   }
 
   static deleteAccounts(req, res) {
-    const { isAdmin } = req.decoded;
     const { accountNumber } = req.params;
-
+    const { isAdmin, isStaff } = req.decoded;
+    const admin = verifyAdmin(isAdmin);
+    const staff = verifyStaff(isStaff);
     try {
-      if (!verifyAdmin(isAdmin)) {
-        return res.status(400).json({
-          status: 400,
-          error: 'only an admin is allowd to perform this task'
-        });
-      }
-
-      db.query(findByAccountNumber, [accountNumber]).then((accts) => {
-        const accounts = accts.rows[0];
-        if ( accounts ) {
-          db.query(deleteAccount, [accountNumber]);
-         return res.status(200).json({
+      if (admin || staff) {
+        db.query(deleteAccount, [accountNumber]).then((accts) => {
+          if (accts.rows.length < 1) {
+            return res.status(404).json({
+              status: 404,
+              error: 'No account found'
+            });
+          }
+          return res.status(200).json({
             status: 200,
             message: 'the selected account  is deleted succesfully',
-          })
-        }
-        return res.status(400).json({
-          status: 400,
-          error: 'account not found'
-        });
-      });
+          });
+        }).catch(err => res.status(400).json({
+          status: 500,
+          error: err.message
+        }));
+      }
+      // return res.status(400).json({
+      //   status: 400,
+      //   error: 'only an admin or staff is allowed to perform this task'
+      // });
     } catch (error) {
       return res.status(400).json({
         status: 400,
@@ -88,9 +89,10 @@ export default class AdminFunctionality {
   }
 
   static async creaditAccount(req, res) {
-    const { staff, userid } = req.decoded;
+    const { isStaff, userid } = req.decoded;
     const { accountNumber } = req.params;
     const { amount } = req.body;
+    const staff = verifyStaff(isStaff);
 
     if (typeof amount !== 'number' || amount < 1) {
       return res.status(400).json({
@@ -108,6 +110,12 @@ export default class AdminFunctionality {
 
     const accountFound = await db.query(findByAccountNumber, acctValue);
     const user = accountFound.rows[0];
+    if (user.status === 'dormant') {
+      return res.status(400).json({
+        status: 400,
+        error: 'this account is dormant'
+      });
+    }
     if (user) {
       const balance = parseFloat(user.currentbalance) + parseFloat(amount);
       const { accountid } = user;
@@ -145,10 +153,10 @@ export default class AdminFunctionality {
 
 
   static async debitAccount(req, res) {
-    const { staff, userid } = req.decoded;
+    const { isStaff, userid } = req.decoded;
     const { accountNumber } = req.params;
     const { amount } = req.body;
-
+    const staff = verifyStaff(isStaff);
     if (typeof amount !== 'number' || amount < 1) {
       return res.status(400).json({
         status: 400,
@@ -164,7 +172,14 @@ export default class AdminFunctionality {
     const acctValue = [accountNumber];
 
     const accountFound = await db.query(findByAccountNumber, acctValue);
+
     const user = accountFound.rows[0];
+    if (user.status === 'dormant') {
+      return res.status(400).json({
+        status: 400,
+        error: 'this account is dormant'
+      });
+    }
     if (user) {
       if (user.currentbalance < amount) {
         return res.status(400).json({

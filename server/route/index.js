@@ -1,15 +1,19 @@
 import express from 'express';
+import passport from 'passport';
 import user from '../Controllers/userController';
 import account from '../Controllers/accountController';
 import findExisting from '../middleware/existingUser';
-import verifyUser from '../middleware/jwtAuth';
+// import verifyUser from '../middleware/jwtAuth';
 import validator from '../validator/inputValidator';
 import adminController from '../Controllers/admincontroller';
 import transactions from '../Controllers/transaction';
 
+const verifyUser = passport.authenticate('jwt', { session: false });
+
 const router = express.Router();
 const { createUser, userLogin } = user;
-const { createAccount, viewAspecificAccountDetails, adminStaffViewAccount } = account;
+const { createAccount, viewAspecificAccountDetails, 
+  adminStaffViewAccount, adminStaffViewAllAccount, adminStaffViewAccountByStatus } = account;
 const { getAllTransaction, viewAtransaction } = transactions;
 const { exitingUsername, existingEmail } = findExisting;
 const { signupValidator, loginValidator, accountValidator } = validator;
@@ -29,5 +33,6 @@ router.get('/accounts/:accountnumber/transactions', verifyUser,getAllTransaction
 router.get('/transactions/:transactionid', verifyUser, viewAtransaction);
 router.get('/accounts/:accountNumber', verifyUser, viewAspecificAccountDetails);
 router.get('/user/:email/accounts', verifyUser, adminStaffViewAccount);
-
+router.get('/accounts', verifyUser, adminStaffViewAllAccount);
+router.get('/account', verifyUser, adminStaffViewAccountByStatus);
 export default router;
