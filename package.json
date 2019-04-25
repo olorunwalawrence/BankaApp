@@ -13,7 +13,9 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "seed": "babel-node server/seeder/index.js"
+    "seed": "babel-node server/seeder/index.js",
+    "build": "babel server -d build",
+    "heroku-postbuild": "npm run unmigrate && npm run migrate "
   },
   "author": "olorunwa lawrence",
   "license": "ISC",
@@ -23,7 +25,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.4",
     "babel-preset-env": "^1.7.0",
-    "bcrypt": "^3.0.4",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
