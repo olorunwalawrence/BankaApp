@@ -9,11 +9,18 @@ export default class transaction {
   static getAllTransaction(req, res) {
     const { accountnumber } = req.params;
     const { email } = req.decoded;
-    console.log(email);
+    const customerMail = email;
+
     try {
       db.query(findAllTransactionByaccount, [accountnumber]).then((trans) => {
-        const { accountemail } = trans.rows;
-        if (email === accountemail) {
+        if (trans.rows.length < 1) {
+          return res.status(404).json({
+            status: 404,
+            error: `this ${accountnumber} number number does not exist`
+          });
+        }
+
+        if (customerMail === trans.rows[0].email) {
           return res.status(200).json({
             status: 200,
             data: trans.rows

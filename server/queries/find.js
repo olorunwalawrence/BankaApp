@@ -9,7 +9,7 @@ const find = {
   findAccountByacctIdAndEmail:'SELECT * FROM trasactions WHERE accountid =$1 AND email = $2',
   findAllTransactionByaccount: 'SELECT * FROM transactions WHERE accountnumber = $1 LIMIT 100 ',
   findAspecificTransaction: 'SELECT * FROM transactions WHERE transactionid = $1 LIMIT 100 ',
-  findAccountByStatus: 'SELECT * FROM accounts WHERE status = $1 LIMIT 1;',
+  findAccountByStatus: 'SELECT * FROM accounts WHERE status = $1 LIMIT 1000'
 };
 
 export default find;

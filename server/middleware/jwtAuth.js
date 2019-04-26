@@ -10,16 +10,16 @@ const secret = process.env.SECRET;
 const verifyUser = (req, res, next) => {
 	const token = req.headers['x-access-token'];
 	if (!token) {
-		res.status(401).json({
+		return res.status(401).json({
 			status: 401,
-			error: 'authentication failed, please login'
+			error: 'authentication failed, please provide a token'
 		});
 	}
 
 	try {
 		const decoded = jwt.verify(token, secret);
 		if (!decoded) {
-			res.status(401).json({
+			return res.status(401).json({
 			error: 'authentication failed'
 			});
 		}
@@ -28,7 +28,7 @@ const verifyUser = (req, res, next) => {
 	} catch (error) {
 		res.status(401).json({
 			status:401,
-			error: 'authentication failed, consider logging in again'
+			error: 'invalid token provided'
 		});
 	}
 };

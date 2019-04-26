@@ -46,7 +46,7 @@ export default class Users {
       return res.status(201).json({
         status: 201,
         data: {
-          token: `Bearer ${token}`,
+          token,
           userid,
           firstname,
           lastname,
@@ -78,7 +78,7 @@ export default class Users {
           return res.status(200).json({
             status: 200,
             data: {
-              token: `Bearer ${token}`,
+              token,
               firstname,
               lastname,
               username,

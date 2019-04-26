@@ -14,9 +14,11 @@ const { adminSignup, creditAccount } = create;
 const { deleteAccount } = Delete;
 export default class AdminFunctionality {
   static ActivatOrDeactivateAccct(req, res) {
-    const { isAdmin } = req.decoded;
+    const { isAdmin, isStaff } = req.decoded;
     const { acctStatus } = req.body;
     const { accountNumber } = req.params;
+    const admin = verifyAdmin(isAdmin);
+    const staff = verifyStaff(isStaff);
 
     if (acctStatus !== 'active' && acctStatus !== 'dormant') {
       return res.status(400).json({
@@ -26,25 +28,24 @@ export default class AdminFunctionality {
     }
 
     try {
-      if (!verifyAdmin(isAdmin)) {
-        return res.status(400).json({
-          status: 400,
-          error: 'only an admin is allowd to perform this task'
-        });
+      if (admin || staff) {
+        const acctValue = [
+          acctStatus,
+          accountNumber
+        ];
+       return  db.query(activateOrDeactivateAcct, acctValue).then(() => res.status(200).json({
+          status: 200,
+          data: {
+            accountNumber,
+            acctStatus
+          }
+        }));
       }
+      return res.status(400).json({
+        status: 400,
+        error: 'only an admin or staff is allowed to perform this task'
+      });
 
-      const acctValue = [
-        acctStatus,
-        accountNumber
-      ];
-
-      db.query(activateOrDeactivateAcct, acctValue).then(() => res.status(200).json({
-        status: 200,
-        data: {
-          accountNumber,
-          acctStatus
-        }
-      }));
     } catch (error) {
       res.status(500).json({
         status: 500,
@@ -139,8 +140,10 @@ export default class AdminFunctionality {
               email,
               cashierid,
               transactionType: type,
-              message: `your account ${accountNumber} was credited with #${amount}`
-            }
+              accountBalance: user.currentbalance
+            
+            },
+            message: `your account ${accountNumber} was credited with #${amount}`
           });
         }
 
@@ -153,7 +156,7 @@ export default class AdminFunctionality {
           status: 500,
           error: error.message
         });
-        
+
       }
     } catch (error) {
       return res.status(500).json({
@@ -200,7 +203,7 @@ export default class AdminFunctionality {
         });
       }
       const balance = parseFloat(user.currentbalance) - parseFloat(amount);
-      const { accountid } = user;
+      const { accountid, email } = user;
       const type = 'debit';
       const cashierid = userid;
       const transactionValues = [
@@ -209,6 +212,7 @@ export default class AdminFunctionality {
         balance,
         accountNumber,
         accountid,
+        email,
         type
       ];
 
@@ -224,6 +228,7 @@ export default class AdminFunctionality {
           balance: updatedBalance.balance,
           cashierid,
           transactionType: type,
+          accountBalance: user.currentbalance
         },
         message: `your account ${accountNumber} was debited with #${amount}`
       });
@@ -251,6 +256,7 @@ export default class AdminFunctionality {
   }
 
   static adminUpdateUserRole(req, res) {
+    
     try {
       const { isAdmin } = req.decoded;
       const { id } = req.params;
@@ -266,24 +272,31 @@ export default class AdminFunctionality {
       const userValue = [
         id
       ];
+
       db.query(findbyId, userValue).then((data) => {
         const user = data.rows[0];
         if (user) {
-          db.query(updateRole, values);
-          return res.status(200).json({
-            status: 200,
-            data: {
-              message: 'user account is successfully updated'
-            }
+          if (user.staff === 'false') {
+            db.query(updateRole, values);
+            return res.status(200).json({
+              status: 200,
+              data: {
+                message: 'user account is successfully updated'
+              }
+            });
+          }
+          return res.status(409).json({
+            status: 409,
+            error: 'user already a staff'
           });
         }
         return res.status(400).json({
           status: 400,
           error: 'User not found'
         });
-      });
+      }).catch(error => res.json(error.message));
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         status: 500,
         error: error.message
       });

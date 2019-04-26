@@ -15,7 +15,7 @@
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "seed": "babel-node server/seeder/index.js",
     "build": "babel server -d build",
-    "heroku-postbuild": "npm run unmigrate && npm run migrate "
+    "heroku-postbuild": "npm run migrate npm start:dev"
   },
   "author": "olorunwa lawrence",
   "license": "ISC",
