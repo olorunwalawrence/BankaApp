@@ -34,7 +34,7 @@ export default {
     check('username')
       .trim().not().isEmpty()
       .matches(/^[a-zA-Z ]+$/)
-      .withMessage('please fill the username field'),
+      .withMessage('please fill the username field and username can only contain number'),
     check('username')
       .custom(value => !/\s/.test(value))
       .withMessage('No spaces are allowed in the username')
