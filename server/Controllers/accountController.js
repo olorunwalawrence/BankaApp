@@ -1,10 +1,10 @@
 /* eslint-disable require-jsdoc */
 
+import { constants } from 'zlib';
 import db from '../models/index';
 import account from '../queries/insert';
 import find from '../queries/find';
 import { verifyStaff, verifyAdmin } from '../helpers/isAdmin';
-import { constants } from 'zlib';
 
 const { createAccount } = account;
 const {
@@ -22,7 +22,7 @@ export default class Account {
     const date = new Date();
     const status = 'active';
     const num = 0;
-    const openbal = num.toFixed(2) 
+    const openbal = num.toFixed(2);
     const openingBalance = parseFloat(openbal);
     const {
       type
@@ -73,7 +73,6 @@ export default class Account {
     ];
 
     db.query(findByAccountNumber, values).then((accts) => {
-
       if (accts.rows.length < 1) {
         return res.status(404).json({
           status: 404,
@@ -176,9 +175,9 @@ export default class Account {
         error: error.message
       }));
     }
-    return res.status(400).json({
-      status: 400,
-      error: 'only an admin  or staff is allowd to perform this task'
-    });
+    // return res.status(400).json({
+    //   status: 400,
+    //   error: 'only an admin  or staff is allowd to perform this task'
+    // });
   }
 }
