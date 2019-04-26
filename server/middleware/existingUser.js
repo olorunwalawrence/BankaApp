@@ -10,8 +10,8 @@ class findExisting {
 
     db.query(findByUsername, [username]).then((user) => {
       if (user.rows.length > 0) {
-       return res.status(400).json({
-          status: 400,
+       return res.status(409).json({
+          status: 409,
           error: 'username unavailable, choose another username',
         });
       }
@@ -26,8 +26,8 @@ class findExisting {
     const { email } = req.body;
     db.query(findbyemail, [email]).then((user) => {
       if (user.rows.length > 0) {
-      return res.status(400).json({
-          status: 404,
+      return res.status(409).json({
+          status: 409,
           error: 'Email Unavailable, please choose a new email address'
         });
       }

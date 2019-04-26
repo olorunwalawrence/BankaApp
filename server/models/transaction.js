@@ -11,6 +11,7 @@ const transactionTables = () => {
         balance VARCHAR(255) NOT NULL,
         cashierid INTEGER REFERENCES users(userid),
         accountid INTEGER REFERENCES accounts(accountid),
+        email VARCHAR(255) REFERENCES accounts(email),
         createdAt TIMESTAMP DEFAULT NOW()
         )`;
   return index.query(transactionTable);
