@@ -35,7 +35,7 @@ app.listen(app.get('port'), () => {
     app.get('port'),
     app.get('env')
   );
-  print.log(' Press CTRL-C to Terminate application');
+  print.log(' Press CTRL C to Terminate application');
 });
 
 export default app;

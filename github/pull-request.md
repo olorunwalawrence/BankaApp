@@ -6,7 +6,7 @@ create express setup
 - Install body-parser
 #### How to manually test this PR
 - clone the [repo ](https://github.com/olorunwalawrence/BankaApp)
-- on your terminal, run `git checkout  `
+- on your terminal, run `git checkout  fix-laf-feeedbacks-165634156`
 - on your terminal, run npm install to install dependencies
 - on your terminal, run npm run start:dev to start the application.
 
