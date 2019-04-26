@@ -93,62 +93,74 @@ export default class AdminFunctionality {
     const { accountNumber } = req.params;
     const { amount } = req.body;
     const staff = verifyStaff(isStaff);
+    try {
+      if (typeof amount !== 'number' || amount < 1) {
+        return res.status(400).json({
+          status: 400,
+          error: 'please enter valid number or amount greater zero'
+        });
+      }
+      if (!verifyStaff(staff)) {
+        return res.status(400).json({
+          status: 401,
+          error: 'only a staff can perform this operation'
+        });
+      }
+      const acctValue = [accountNumber];
 
-    if (typeof amount !== 'number' || amount < 1) {
-      return res.status(400).json({
-        status: 400,
-        error: 'please enter valid number or amount greater zero'
-      });
-    }
-    if (!verifyStaff(staff)) {
-      return res.status(400).json({
-        status: 400,
-        error: 'only a staff can perform this operation'
-      });
-    }
-    const acctValue = [accountNumber];
+      const accountFound = await db.query(findByAccountNumber, acctValue);
+      const user = accountFound.rows[0];
+      try {
+        if (user) {
+          const balance = parseFloat(user.currentbalance) + parseFloat(amount);
+          const { accountid, email } = user;
+          const type = 'credit';
+          const cashierid = userid;
+          const transactionValues = [
+            cashierid,
+            amount,
+            balance,
+            accountNumber,
+            accountid,
+            email,
+            type
+          ];
 
-    const accountFound = await db.query(findByAccountNumber, acctValue);
-    const user = accountFound.rows[0];
-    if (user.status === 'dormant') {
-      return res.status(400).json({
-        status: 400,
-        error: 'this account is dormant'
-      });
-    }
-    if (user) {
-      const balance = parseFloat(user.currentbalance) + parseFloat(amount);
-      const { accountid } = user;
-      const { type } = user;
-      const cashierid = userid;
-      const transactionValues = [
-        cashierid,
-        amount,
-        balance,
-        accountNumber,
-        accountid,
-        type
-      ];
-
-      const transaction = await db.query(creditAccount, transactionValues);
-      const data = transaction.rows[0];
-      const updatedBalance = await db.query(updateBal, [balance, user.accountid]);
-      const { transactionid } = updatedBalance;
-      return res.status(201).json({
-        status: 201,
-        data: {
-          transactionid,
-          amount,
-          balance: updatedBalance.balance,
-          cashierid,
-          transactionType: user.type
+          const transaction = await db.query(creditAccount, transactionValues);
+          const data = transaction.rows[0];
+          const updatedBalance = await db.query(updateBal, [balance, user.accountid]);
+          const { transactionid } = updatedBalance;
+          return res.status(201).json({
+            status: 201,
+            data: {
+              transactionid,
+              amount,
+              balance: updatedBalance.balance,
+              email,
+              cashierid,
+              transactionType: type,
+              message: `your account ${accountNumber} was credited with #${amount}`
+            }
+          });
         }
+
+        return res.status(400).json({
+          status: 400,
+          error: `this account ${accountNumber} number does nor exist`
+        });
+      } catch (error) {
+        return res.status(500).json({
+          status: 500,
+          error: error.message
+        });
+        
+      }
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error: error.message
       });
     }
-    return res.status(400).json({
-      status: 400,
-      error: 'No acount found'
-    });
   }
 
 
@@ -177,7 +189,7 @@ export default class AdminFunctionality {
     if (user.status === 'dormant') {
       return res.status(400).json({
         status: 400,
-        error: 'this account is dormant'
+        error: 'this account is dormant please visit the customer care for more information'
       });
     }
     if (user) {
@@ -189,7 +201,7 @@ export default class AdminFunctionality {
       }
       const balance = parseFloat(user.currentbalance) - parseFloat(amount);
       const { accountid } = user;
-      const { type } = user;
+      const type = 'debit';
       const cashierid = userid;
       const transactionValues = [
         cashierid,
@@ -211,13 +223,14 @@ export default class AdminFunctionality {
           amount,
           balance: updatedBalance.balance,
           cashierid,
-          transactionType: data.type
-        }
+          transactionType: type,
+        },
+        message: `your account ${accountNumber} was debited with #${amount}`
       });
     }
     return res.status(400).json({
       status: 400,
-      error: 'No acount found'
+      error: `this account ${accountNumber} number does nor exist`
     });
   }
 

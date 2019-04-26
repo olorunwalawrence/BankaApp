@@ -38,7 +38,7 @@ export default class Users {
     ];
     return db.query(userSignup, userValues).then((newUser) => {
       const { userid } = newUser.rows[0];
-      
+
       const token = jwt.sign({
         userid, firstname, lastname, email, username, isAdmin, staff
       }, secret, { expiresIn: '10h' });
@@ -46,13 +46,14 @@ export default class Users {
       return res.status(201).json({
         status: 201,
         data: {
-          token:`Bearer ${token}`,
+          token: `Bearer ${token}`,
           userid,
           firstname,
           lastname,
           email,
           isAdmin
-        }
+        },
+        message: `${username} account has been successfully created `
       });
     });
   }
@@ -60,40 +61,49 @@ export default class Users {
 
   // user login
   static userLogin(req, res) {
-    const { email, password } = req.body;
-    const userEmail = [email.trim()];
+    try {
+      const { email, password } = req.body;
+      const userEmail = [email.trim()];
 
-    db.query(findbyemail, userEmail).then((user) => {
-      if (user.rows[0] && bcrypt.compareSync(password.trim(), user.rows[0].password)) {
-        const {
-          userid, username, firstname, lastname, isadmin, staff
-        } = user.rows[0];
-        const isAdmin = isadmin === 'true';
-        const isStaff = staff === 'true';
-        const token = jwt.sign({
-          userid, firstname, lastname, email, username, isAdmin, isStaff
-        }, secret, { expiresIn: '10h' });
-        return res.status(200).json({
-          status: 200,
-          data: {
-            token:`Bearer ${token}`,
-            firstname,
-            lastname,
-            username,
-            email,
-            isAdmin
-          }
+      db.query(findbyemail, userEmail).then((user) => {
+        if (user.rows[0] && bcrypt.compareSync(password.trim(), user.rows[0].password)) {
+          const {
+            userid, username, firstname, lastname, isadmin, staff
+          } = user.rows[0];
+          const isAdmin = isadmin === 'true';
+          const isStaff = staff === 'true';
+          const token = jwt.sign({
+            userid, firstname, lastname, email, username, isAdmin, isStaff
+          }, secret, { expiresIn: '10h' });
+          return res.status(200).json({
+            status: 200,
+            data: {
+              token: `Bearer ${token}`,
+              firstname,
+              lastname,
+              username,
+              email,
+              isAdmin
+            },
+            message: `${username} is successfully logged in `
+          });
+        }
+        return res.status(400).json({
+          status: 400,
+          error: 'Login credentials is incorrect. '
         });
-      }
-      return res.status(400).json({
-        status: 400,
-        error: 'Login credentials is incorrect. '
+      }).catch((err) => {
+        res.status(500).json({
+          status: 500,
+          error: `their is an internal/server error ${err.message}`
+        });
       });
-    }).catch((err) => {
-      res.status(500).json({
+    } catch (error) {
+      return res.status(500).json({
         status: 500,
-        error: `their is an internal/server error ${err.message}`
+        error: error.message
       });
-    });
+    }
+
   }
 }

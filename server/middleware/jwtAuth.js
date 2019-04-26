@@ -10,8 +10,8 @@ const secret = process.env.SECRET;
 const verifyUser = (req, res, next) => {
 	const token = req.headers['x-access-token'];
 	if (!token) {
-		res.status(403).json({
-			status: 403,
+		res.status(401).json({
+			status: 401,
 			error: 'authentication failed, please login'
 		});
 	}
@@ -26,8 +26,8 @@ const verifyUser = (req, res, next) => {
 		req.decoded = decoded;
 		next();
 	} catch (error) {
-		res.status(400).json({
-			status:400,
+		res.status(401).json({
+			status:401,
 			error: 'authentication failed, consider logging in again'
 		});
 	}

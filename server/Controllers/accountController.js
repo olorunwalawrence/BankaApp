@@ -4,6 +4,7 @@ import db from '../models/index';
 import account from '../queries/insert';
 import find from '../queries/find';
 import { verifyStaff, verifyAdmin } from '../helpers/isAdmin';
+import { constants } from 'zlib';
 
 const { createAccount } = account;
 const {
@@ -20,8 +21,11 @@ export default class Account {
     const accountNumber = Math.floor(Math.random() * 10000000000);
     const date = new Date();
     const status = 'active';
+    const num = 0;
+    const openbal = num.toFixed(2) 
+    const openingBalance = parseFloat(openbal);
     const {
-      type, openingBalance
+      type
     } = req.body;
     if (type !== 'savings' && type !== 'current') {
       return res.status(400).json({
@@ -29,12 +33,7 @@ export default class Account {
         error: 'only savings and current is allowed is the account type'
       });
     }
-    if (typeof openingBalance !== 'number' || openingBalance < 0) {
-      return res.status(400).json({
-        status: 400,
-        error: 'please enter valid number for openingBalance or openingBalance greater than zero'
-      });
-    }
+
     const currentbalance = openingBalance;
     const accountvalue = [
       type,
@@ -59,8 +58,8 @@ export default class Account {
         balance: openingBalance
       }
     })).catch((error) => {
-      res.status(400).json({
-        status: 400,
+      res.status(409).json({
+        status: 409,
         error: error.detail
       });
     });
@@ -74,6 +73,7 @@ export default class Account {
     ];
 
     db.query(findByAccountNumber, values).then((accts) => {
+
       if (accts.rows.length < 1) {
         return res.status(404).json({
           status: 404,
