@@ -22,7 +22,7 @@ const fieldValidator = (type, args) => {
     }
     if (inputFieldCount.length < expectedInput.length) {
       response.status = 400;
-      response.error = 'firstname, lastname, email, password, username are required';
+      response.error = 'some of the required field/s are not provided please check and provide them';
     }
     return response;
   }
@@ -47,12 +47,12 @@ const fieldValidator = (type, args) => {
     }
     if (inputFieldCount.length < expectedInput.length) {
       response.status = 400;
-      response.error = 'email, password are required';
+      response.error = 'email or password field is required';
     }
     return response;
   }
   if (type == 'account') {
-    const expectedInput = ['openingBalance', 'type'];
+    const expectedInput = ['type'];
     for (const input in args) {
       inputFieldCount.push(input);
       const inputField = args[input];
@@ -66,15 +66,16 @@ const fieldValidator = (type, args) => {
       if (!expectedInput.includes(input)) {
         empty.push(input);
         response.status = 400;
-        response.error = `${empty} are not account creation request`
+        response.error = `${empty} is not account creation request`
       }
     }
-    if (inputFieldCount.length < 2) {
+    if (inputFieldCount.length < 1) {
       response.status = 400;
-      response.error = 'openingBalance, type are required';
+      response.error = 'type is required';
     }
     return response;
   }
+
   if (type == 'staff') {
     for (const input in args) {
       inputFieldCount.push(input);
@@ -89,6 +90,31 @@ const fieldValidator = (type, args) => {
     if (inputFieldCount.length < 5) {
       response.status = 400;
       response.error = 'firstname, lastname, email, password, username,isStaff are required';
+    }
+    return response;
+  }
+
+   if (type == 'transaction') {
+    const expectedInput = ['amount'];
+    for (const input in args) {
+      inputFieldCount.push(input);
+      const inputField = args[input];
+      if (typeof inputField === 'string') {
+        if (args[input].trim() === '') {
+          empty.push(input);
+          response.status = 400;
+          response.error = `${empty} field/s cannot be empty`;
+        }
+      }
+      if (!expectedInput.includes(input)) {
+        empty.push(input);
+        response.status = 400;
+        response.error = `${empty} is not transaction creation required field/s`
+      }
+    }
+    if (inputFieldCount.length < 1) {
+      response.status = 400;
+      response.error = 'amount is required';
     }
     return response;
   }
