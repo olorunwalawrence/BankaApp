@@ -1,13 +1,13 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "description": "Banka is a light-weight core banking application that powers banking operations   like account creation, customer deposit and withdrawals. This app is meant to support a single bank, where users can signup and create bank accounts online, but must visit the branch to withdraw or deposit money.",
+    "description": "Banka is a light-weight core banking application that powers banking operations like account creation, customer deposit and withdrawals. This app is meant to support a single bank, where users can signup and create bank accounts online, but must visit the branch to withdraw or deposit money.",
     "version": "1.0.0",
     "title": "Banka"
   },
   "servers": [
     {
-      "url": "banka.herokuapp.com"
+      "url": "https://bankaapps.herokuapp.com/"
     }
   ],
   "tags": [
@@ -61,7 +61,7 @@
         }
       }
     },
-    "/auth/signin": {
+    "/auth/login": {
       "post": {
         "tags": [
           "User"
@@ -105,7 +105,7 @@
         "summary": "Creates a new bank account",
         "security": [
           {
-            "bearerAuth": [
+            "x-access-token": [
 
             ]
           }
@@ -148,7 +148,7 @@
         "summary": "Updates the bank account status",
         "security": [
           {
-            "bearerAuth": [
+            "x-access-token": [
 
             ]
           }
@@ -202,7 +202,7 @@
         "summary": "Delete bank account information by account number",
         "security": [
           {
-            "bearerAuth": [
+            "x-access-token": [
 
             ]
           }
@@ -233,7 +233,7 @@
         "summary": "Find Bank account by account number",
         "security": [
           {
-            "bearerAuth": [
+            "x-access-token": [
 
             ]
           }
@@ -279,7 +279,7 @@
         "summary": "Find Bank account by user email",
         "security": [
           {
-            "bearerAuth": [
+            "x-access-token": [
 
             ]
           }
@@ -326,7 +326,7 @@
         "summary": "Create a new credit transaction in the system",
         "security": [
           {
-            "bearerAuth": [
+            "x-access-token": [
 
             ]
           }
@@ -371,7 +371,7 @@
         "summary": "Create a new debit transaction in the system",
         "security": [
           {
-            "bearerAuth": [
+            "x-access-token": [
 
             ]
           }
@@ -416,7 +416,7 @@
         "summary": "Find transaction by account number",
         "security": [
           {
-            "bearerAuth": [
+            "x-access-token": [
 
             ]
           }
@@ -464,7 +464,7 @@
         "summary": "Find  transaction by ID",
         "security": [
           {
-            "bearerAuth": [
+            "x-access-token": [
 
             ]
           }
@@ -507,9 +507,9 @@
   },
   "components": {
     "securitySchemes": {
-      "bearerAuth": {
+      "x-access-token": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "x-access-token"
       }
     },
     "schemas": {
@@ -519,7 +519,7 @@
           "token": {
             "type": "string"
           },
-          "id": {
+          "userid": {
             "type": "integer",
             "format": "int64"
           },
@@ -535,16 +535,16 @@
           "password": {
             "type": "string"
           },
-          "phoneNumber": {
+          "username": {
             "type": "string"
           },
-          "type": {
+          "staff": {
             "type": "string"
           },
           "isAdmin": {
             "type": "boolean"
           },
-          "registeredOn": {
+          "createdOn": {
             "type": "string"
           }
         }
@@ -597,6 +597,21 @@
           },
           "newbalance": {
             "type": "number"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
           }
         }
       }

@@ -60,7 +60,7 @@ export default class Account {
     })).catch((error) => {
       res.status(409).json({
         status: 409,
-        error: error.detail
+        error: `account with ${error.detail}`
       });
     });
   }
@@ -91,33 +91,41 @@ export default class Account {
     });
   }
 
-  static adminStaffViewAccount(req, res) {
-    const { isAdmin, isStaff } = req.decoded;
+  static userViewASpecificAccount(req, res) {
+    const userEmail = req.decoded.email;
     const { email } = req.params;
 
     const values = [
       email
     ];
-    const admin = verifyAdmin(isAdmin);
-    const staff = verifyStaff(isStaff);
-
-    if (admin || staff) {
-      return db.query(findAccountByemail, values).then((accts) => {
+    try {
+      db.query(findAccountByemail, values).then((accts) => {
         if (accts.rows.length < 1) {
           return res.status(404).json({
             status: 404,
-            error: 'No account found'
+            error: `this email (${email}) is not associated with any account`
           });
         }
-        return res.status(200).json({
-          status: 200,
-          data: accts.rows
+        if (email === userEmail) {
+          return res.status(200).json({
+            status: 200,
+            data: accts.rows
+          });
+        }
+        return res.status(400).json({
+          status: 400,
+          error: 'pls kindly login to your account to view all your details'
         });
       }).catch((error) => {
-        res.status(500).json({
+        return res.status(500).json({
           status: 500,
           error: error.message
         });
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error: 'account not found'
       });
     }
   }
@@ -175,9 +183,9 @@ export default class Account {
         error: error.message
       }));
     }
-    // return res.status(400).json({
-    //   status: 400,
-    //   error: 'only an admin  or staff is allowd to perform this task'
-    // });
+    return res.status(400).json({
+      status: 400,
+      error: 'only an admin  or staff is allowd to perform this task'
+    });
   }
 }

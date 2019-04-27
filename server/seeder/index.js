@@ -1,3 +1,4 @@
 import admin from '../Controllers/admincontroller';
 
-admin.createAdminAccount();
+setTimeout(admin.createAdminAccount, 500);
+setTimeout(process.exit, 2000);

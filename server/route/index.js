@@ -18,7 +18,7 @@ const { validateInput } = helpers;
 const { userSignUpDetails, userLoginDetails, valideAmount } = validateInputs;
 const { createUser, userLogin } = user;
 const {
- createAccount, viewAspecificAccountDetails, adminStaffViewAccount, adminStaffViewAllAccount, adminStaffViewAccountByStatus } = account;
+ createAccount, viewAspecificAccountDetails, userViewASpecificAccount, adminStaffViewAllAccount, adminStaffViewAccountByStatus } = account;
 const { getAllTransaction, viewAtransaction } = transactions;
 const { exitingUsername, existingEmail } = findExisting;
 const {loginValidator, accountValidator, signupValidator, transactionValidator } = validator;
@@ -37,7 +37,7 @@ router.post('/transactions/:accountNumber/debit', valideAmount, transactionValid
 router.get('/accounts/:accountnumber/transactions', verifyUser, getAllTransaction);
 router.get('/transactions/:transactionid', verifyUser, viewAtransaction);
 router.get('/accounts/:accountNumber', verifyUser, viewAspecificAccountDetails);
-router.get('/user/:email/accounts', verifyUser, adminStaffViewAccount);
+router.get('/user/:email/accounts', verifyUser, userViewASpecificAccount);
 router.get('/accounts', verifyUser, adminStaffViewAllAccount);
 router.get('/account', verifyUser, adminStaffViewAccountByStatus);
 
