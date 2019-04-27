@@ -33,7 +33,7 @@ export default class AdminFunctionality {
           acctStatus,
           accountNumber
         ];
-       return  db.query(activateOrDeactivateAcct, acctValue).then(() => res.status(200).json({
+        return db.query(activateOrDeactivateAcct, acctValue).then(() => res.status(200).json({
           status: 200,
           data: {
             accountNumber,
@@ -45,7 +45,6 @@ export default class AdminFunctionality {
         status: 400,
         error: 'only an admin or staff is allowed to perform this task'
       });
-
     } catch (error) {
       res.status(500).json({
         status: 500,
@@ -61,16 +60,18 @@ export default class AdminFunctionality {
     const staff = verifyStaff(isStaff);
     try {
       if (admin || staff) {
-        db.query(deleteAccount, [accountNumber]).then((accts) => {
-          if (accts.rows.length < 1) {
-            return res.status(404).json({
-              status: 404,
-              error: 'No account found'
+        db.query(findByAccountNumber, [accountNumber]).then((accts) => {
+
+          if (accts.rows.length === 1) {
+            db.query(deleteAccount, [accountNumber]);
+            return res.status(200).json({
+              status: 200,
+              message: 'the selected account  is deleted succesfully',
             });
           }
-          return res.status(200).json({
-            status: 200,
-            message: 'the selected account  is deleted succesfully',
+          return res.status(404).json({
+            status: 404,
+            error: 'No account found'
           });
         }).catch(err => res.status(400).json({
           status: 500,
@@ -141,7 +142,7 @@ export default class AdminFunctionality {
               cashierid,
               transactionType: type,
               accountBalance: user.currentbalance
-            
+
             },
             message: `your account ${accountNumber} was credited with #${amount}`
           });
@@ -156,7 +157,6 @@ export default class AdminFunctionality {
           status: 500,
           error: error.message
         });
-
       }
     } catch (error) {
       return res.status(500).json({
@@ -256,7 +256,6 @@ export default class AdminFunctionality {
   }
 
   static adminUpdateUserRole(req, res) {
-    
     try {
       const { isAdmin } = req.decoded;
       const { id } = req.params;
