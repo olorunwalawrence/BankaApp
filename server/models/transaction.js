@@ -10,7 +10,7 @@ const transactionTables = () => {
         accountnumber VARCHAR(255) NOT NULL,
         balance VARCHAR(255) NOT NULL,
         cashierid INTEGER REFERENCES users(userid),
-        accountid INTEGER REFERENCES accounts(accountid),
+        accountid INTEGER REFERENCES accounts(accountid) ON DELETE CASCADE,
         email VARCHAR(255) REFERENCES accounts(email),
         createdAt TIMESTAMP DEFAULT NOW()
         )`;

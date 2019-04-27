@@ -15,7 +15,7 @@
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "seed": "babel-node server/seeder/index.js",
     "build": "babel server -d build",
-    "heroku-postbuild": "npm run migrate npm start:dev"
+    "heroku-postbuild": "npm run migrate npm start"
   },
   "author": "olorunwa lawrence",
   "license": "ISC",
@@ -41,6 +41,7 @@
     "pg-hstore": "^2.3.2",
     "random-string": "^0.2.0",
     "shortid": "^2.2.14",
+    "swagger-ui-express": "^4.0.2",
     "validator": "^10.9.0"
   },
   "devDependencies": {

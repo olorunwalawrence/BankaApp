@@ -2,8 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
 import route from './server/route/index';
 import passportAuth from './server/middleware/passport';
+import swaggerDocument from './swagger.json';
 
 const app = express();
 
@@ -15,7 +17,10 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 passportAuth(passport);
-
+/*= ===========
+ APP DOCS
+============= */
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', route);
 
 app.set('port', parseInt(process.env.PORT, 10));
@@ -35,7 +40,7 @@ app.listen(app.get('port'), () => {
     app.get('port'),
     app.get('env')
   );
-  print.log(' Press CTRL C to Terminate application');
+  print.log(' Press CTRL + C to Terminate application');
 });
 
 export default app;
