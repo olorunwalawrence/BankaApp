@@ -20,7 +20,7 @@ passportAuth(passport);
 /*= ===========
  APP DOCS
 ============= */
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api/v1/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/api/v1', route);
 
 app.set('port', parseInt(process.env.PORT, 10));

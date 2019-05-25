@@ -1,16 +1,6 @@
 
-
-
 @media(min-width: 900px) {
-    .banner-text{
-        color:rgb(199, 193, 193);
-        font-size: 14px;
-        font-family: 'Times New Roman', Times, serif;
-        text-align: center;
-        width:500px;
-        position: relative;
-        left:27%;
-    }
+
    
   }
 @media(max-width: 900px) {
@@ -33,16 +23,6 @@
       text-align: center;
     }
     
-    
-    .banner-text{
-        color:rgb(199, 193, 193);
-        font-size: 14px;
-        font-family: 'Times New Roman', Times, serif;
-        text-align: center;
-        width:450px;
-        position: relative;
-        left:19%;
-    }
   }
   
   @media  (max-width: 690px) {
@@ -53,15 +33,7 @@
       right: 0;
       top: 0;
     }
-    .banner-text{
-        color:rgb(199, 193, 193);
-        font-size: 14px;
-        font-family: 'Times New Roman', Times, serif;
-        text-align: center;
-        width:300px;
-        position: relative;
-        left:15%;
-    }
+
     .topnav.responsive a {
       float: none;
       display: block;
@@ -76,15 +48,6 @@
     }
   }
   @media (max-width:500px){
-    .banner-text{
-        color:rgb(199, 193, 193);
-        font-size: 14px;
-        font-family: 'Times New Roman', Times, serif;
-        text-align: center;
-        width:200px;
-        position: relative;
-        left:20%;
-    }
     .signup-form{
         width:80%;
         margin:0;
@@ -127,14 +90,5 @@
     }
   }
   @media (max-width:250px){
-    .banner-text{
-        color:rgb(199, 193, 193);
-        font-size: 14px;
-        font-family: 'Times New Roman', Times, serif;
-        text-align: center;
-        width:170px;
-        height: auto;
-        position: relative;
-        left:0;
-    }
+
 }

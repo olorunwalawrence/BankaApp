@@ -27,7 +27,7 @@ const {
 } = adminController;
 
 router.post('/auth/signup', signupValidator, userSignUpDetails, validateInput, existingEmail, exitingUsername, createUser);
-router.put('/update/user/:id', verifyUser, adminUpdateUserRole);
+router.put('/update/user', verifyUser, adminUpdateUserRole);
 router.post('/auth/login', loginValidator, userLoginDetails, userLogin);
 router.post('/accounts', accountValidator, verifyUser, createAccount);
 router.patch('/account/:accountNumber', verifyUser, ActivatOrDeactivateAccct);

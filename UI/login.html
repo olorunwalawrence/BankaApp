@@ -18,6 +18,8 @@
       media="screen"
       href="./asset/css/login.css"
     />
+   
+    <script src="https://unpkg.com/axios/dist/axios.min.js"> </script>
   </head>
   <body>
       <div class="backdrop"></div>
@@ -28,8 +30,7 @@
             </div>
             <div class="topnav" id="myTopnav">
                 <a href="signup.html">Sign up</a>
-                <a href="index.html">Home</a> 
-                <!-- <a href="reset.html">Reset password</a>  -->
+                <a href="index.html">Home</a>
                
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -48,6 +49,7 @@
       <div class="signup-form">
         <form>
             <h1 class="form-h1">Login Form</h1>
+            <div class="error"></div>
 
             <input type="text" id="email" name="email" placeholder="email" required>
 
@@ -69,5 +71,7 @@
       </footer>
 
     <script src="./asset/js/login.js"></script>
+    <script src="./asset/js/reuseable.js"></script>
+    
   </body>
 </html>

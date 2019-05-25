@@ -60,5 +60,7 @@ export default {
     check('amount')
       .custom(value => !/\s/.test(value))
       .withMessage('No spaces are allowed in the amount')
-  ]
+  ],
+
+
 };

@@ -1,8 +1,15 @@
-const myFunction = () => {
-    let x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-      x.className += " responsive";
-    } else {
-      x.className = "topnav";
-    }
+
+const logout = document.querySelector('#logout');
+
+
+const user = {
+
+  logoutUser() {
+    window.localStorage.removeItem('token');
+    window.location.replace('index.html');
   }
+};
+
+
+// logout.addEventListener('click', user.logoutUser);
+
