@@ -6,13 +6,6 @@ section{
   width:100%;
 }
 
-
-.banner {
-  width: 100%;
-  background-color: rgb(145, 43, 43);
-  opacity: 0.8;
-  height: 250px;
-}
 .topnav {
   overflow: hidden;
   background-color: #333;
@@ -49,7 +42,7 @@ section {
 
 
 
-.signup-form{
+/* .signup-form{
   width:30%;
   margin:0;
   top:150px;
@@ -59,8 +52,8 @@ section {
   height: 380px;
   width:30%;
  
-}
-.form-h1{
+} */
+/* .form-h1{
   color:rgb(211, 208, 208);
   text-align: center;
   padding-top:30px;
@@ -83,7 +76,7 @@ section {
   color:white;
   background:green;
   font-weight: bold;
-}
+} */
 p{
   color:white;
   margin:0;
@@ -97,10 +90,10 @@ a{
 
 /*  */
 
-img {
+/* img {
   float: left;
   padding-right: 20px;
-}
+} */
 
 
 @media (min-width: 900px) {

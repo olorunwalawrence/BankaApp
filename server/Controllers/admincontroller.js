@@ -9,7 +9,7 @@ import create from '../queries/insert';
 
 const { activateOrDeactivateAcct, updateRole, updateBal } = updateAccount;
 
-const { findByAccountNumber, findbyId } = find;
+const { findByAccountNumber, findbyId , findbyemail} = find;
 const { adminSignup, creditAccount } = create;
 const { deleteAccount } = Delete;
 export default class AdminFunctionality {
@@ -258,7 +258,7 @@ export default class AdminFunctionality {
   static adminUpdateUserRole(req, res) {
     try {
       const { isAdmin } = req.decoded;
-      const { id } = req.params;
+      const { email } = req.body;
 
       if (!verifyAdmin(isAdmin)) {
         return res.status(400).json({
@@ -267,12 +267,12 @@ export default class AdminFunctionality {
         });
       }
       const staff = true;
-      const values = [staff, id];
+      const values = [staff, email];
       const userValue = [
-        id
+        email
       ];
 
-      db.query(findbyId, userValue).then((data) => {
+      db.query(findbyemail, userValue).then((data) => {
         const user = data.rows[0];
         if (user) {
           if (user.staff === 'false') {
@@ -286,12 +286,12 @@ export default class AdminFunctionality {
           }
           return res.status(409).json({
             status: 409,
-            error: 'user already a staff'
+            error: 'user is already a staff'
           });
         }
         return res.status(400).json({
           status: 400,
-          error: 'User not found'
+          error: 'This user is not a registered user'
         });
       }).catch(error => res.json(error.message));
     } catch (error) {

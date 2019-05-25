@@ -8,6 +8,9 @@
   "servers": [
     {
       "url": "https://bankaapps.herokuapp.com/"
+    },
+    {
+      "url":"http://localhost:9000/api/v1"
     }
   ],
   "tags": [
@@ -23,6 +26,9 @@
       "name": "Transaction",
       "description": ""
     }
+  ],
+  "schemes":[
+    "https","http"
   ],
   "paths": {
     "/auth/signup": {

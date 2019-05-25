@@ -1,10 +1,13 @@
-import index from './index';
+import index from "./index";
 
 const accountTable = () => {
   const accountTable = `
           CREATE TABLE IF NOT EXISTS accounts (
           accountid SERIAL PRIMARY KEY,
           type VARCHAR(255) NOT NULL,
+          address VARCHAR(255) NOT NULL,
+          phoneNumber VARCHAR(255) NOT NULL,
+          bvnNumber VARCHAR(255) NOT NULL,
           openingBalance NUMERIC NOT NULL,
           currentbalance NUMERIC NOT NULL,
           firstname VARCHAR(255) NOT NULL,

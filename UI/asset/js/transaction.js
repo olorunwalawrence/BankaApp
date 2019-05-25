@@ -1,5 +1,5 @@
 
-  /* eslint-disable require-jsdoc */
+/* eslint-disable require-jsdoc */
 /* eslint-disable func-names */
 const display = document.querySelector('.views');
 const responsive_display = document.querySelector('.viewss');
@@ -22,7 +22,7 @@ const resDisplayAccount = () => {
   document.querySelector('.view-transactions').style.display = 'block';
 };
 
-responsive_display.addEventListener('click', resDisplayAccount)
+responsive_display.addEventListener('click', resDisplayAccount);
 
 
 const closeAccount = () => {
@@ -34,10 +34,12 @@ const deleteAccount = () => {
 };
 
 const myFunction = () => {
-    let x = document.getElementById("myTopnav");
-    if (x.className === "topnav") {
-      x.className += " responsive";
-    } else {
-      x.className = "topnav";
-    }
+  const x = document.getElementById('myTopnav');
+  if (x.className === 'topnav') {
+    x.className += ' responsive';
+  } else {
+    x.className = 'topnav';
   }
+};
+
+

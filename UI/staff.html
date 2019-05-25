@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Banka</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -25,9 +26,15 @@
     rel="stylesheet"
     type="text/css"
     media="screen"
-    href="./asset/css/account.css"
+    href="./asset/css/responsive.css"
   />
-   
+  <link
+  rel="stylesheet"
+  type="text/css"
+  media="screen"
+  href="./asset/css/account.css"
+/>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="backdrop"></div>
@@ -39,12 +46,14 @@
           </h1>
         </div>
         <div class="topnav" id="myTopnav">
-            <a href="index.html">Logout</a>
+          <a id="logout">Logout</a>
             <div class="mobile-nav">
-                <a href="addmin-staff-account.html">create admn/staff account</a>
-                <a href="accounts.html">view all bank account</a>
-                <a href="credit.html">credit/debit account</a>
-            </div>
+                <a href="#">create bank account</a>
+                <a href="profile.html">view account profile</a>
+                
+                  <a href="transactionhistory.html">view transaction history
+                    
+          </div>
           <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
           </a>
@@ -58,11 +67,12 @@
       <div class="section-body">
         <aside>
           <div class="side-bar">
-              
-            <li><a href="addmin-staff-account.html">create admn/staff account</a></li>
-            <li><a href="accounts.html">view all bank account</a></li>
-            <li><a href="credit.html">credit/debit account</a></li>
-          
+            <li><a href="#">create bank account</a></li>
+            <li><a href="profile.html">view account profile</a></li>
+            <!-- <li>
+              <a href="transactionhistory.html">view transaction history</a>
+            </li> -->
+
           </div>
         </aside>
 
@@ -71,17 +81,10 @@
      
             <div class="signup-form">
               <form>
-                  <h1 class="form-h1">Credit or Debit  Account</h1>
-                  <label for="">Type of transaction</label><br><br>
-                  <input type="radio" name="gender" value="credit"> Credit<br>
-                  <input type="radio" name="gender" value="debit"> Debit<br>
-  
-                  <input type="text" id="acctNum" name="accountNum" placeholder="account Number" required>
-  
-                  <input type="text" id="casheir" name="casheir" placeholder="casheir name" required>
-  
-                  <input type="number" id="amount" name="amt" placeholder="amount" required>
-  
+                  <h1 class="form-h1">Credit or Debit account</h1>
+                  <div class="error"></div>
+           
+                  <input type="number" id="amount" name="amount" placeholder="Amount" >
                   <button type="submit" class="btn">Submit</button>
                 
                   
@@ -96,6 +99,8 @@
         <p class="copy-right">copyright @ olorunwa lawrence 2019</p>
       </div>
     </footer>
-    <script src="./asset/js/index.js"></script>
+    <script src="./asset/js/reuseable.js"></script>
+    <script src="./asset/js/staff.js"></script>
+
   </body>
 </html>

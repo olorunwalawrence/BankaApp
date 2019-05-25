@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable require-jsdoc */
 import { config } from 'dotenv';
 import bcrypt from 'bcryptjs';
@@ -55,6 +56,11 @@ export default class Users {
         },
         message: `${username} account has been successfully created `
       });
+    }).catch((error) =>{
+      return res.status(400).json({
+        status: 400,
+        message: error.message
+      });
     });
   }
 
@@ -82,6 +88,7 @@ export default class Users {
               firstname,
               lastname,
               username,
+              isStaff,
               email,
               isAdmin
             },

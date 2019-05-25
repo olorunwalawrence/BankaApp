@@ -21,21 +21,13 @@ label{
   color:grey;
 }
 th, td {
-  text-align: left;
+  text-align: center;
   padding: 8px;
+  cursor: pointer;
 }
 
 tr:nth-child(even){background-color: #f2f2f2}
-.view-transactions{
-    display: none;
-}
-.view-transactions .close{
-    position: relative;
-    top:0;
-    right: 0;
-    color: yellowgreen;
-    cursor: pointer;
-}
+
 #accounts{
     position: absolute;;
     top:250px;
@@ -46,7 +38,17 @@ tr:nth-child(even){background-color: #f2f2f2}
     font-size: 100px;
     padding:15px 40px;
 }
+.viewAtrasaction{
+  display: none;
+  position: absolute; 
+  z-index: 1;
+  padding-top: 200px;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
 
+}
 a{
     color:blue;
     cursor: pointer;
@@ -54,40 +56,44 @@ a{
 #activate{
     cursor: pointer;
 }
+#myModal{
+  background-color: #f2f2f2;
+  display:block; 
+  position: absolute; 
+  z-index: 1;
+  padding-top: 200px;
+  left: 0;
+  top: 0;
+  width: 20%; 
+  height: 20%; 
+  background-color: #f2f2f2;
+}
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  display:block; 
+  position: absolute; 
   z-index: 1; /* Sit on top */
   padding-top: 200px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4); 
 }
 
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
 
 /* The Close Button */
 .close {
   color: #aaaaaa;
   float: right;
-  font-size: 28px;
+  font-size: 40px;
   font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-  color: #000;
+  color: rgb(252, 0, 0);
   text-decoration: none;
   cursor: pointer;
 }

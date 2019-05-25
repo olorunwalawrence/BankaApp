@@ -9,6 +9,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+
     <link
     rel="stylesheet"
     type="text/css"
@@ -21,6 +22,7 @@
       media="screen"
       href="./asset/css/signup.css"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="backdrop"></div>
@@ -30,7 +32,7 @@
             <h1 class="logo"><a href="index.html"><span>Ban</span>ka</a></h1>
         </div>
         <div class="topnav" id="myTopnav">
-          <a href="index.html">Logout</a> <a href="index.html">Home</a>
+           <a href="index.html">Home</a>
           <a href="login.html">Login</a>
 
           <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -47,49 +49,53 @@
     <section class="wrapper">
       <div>
         <div class="signup-form">
+         
           <form>
             <h1 class="form-h1">Signup Form</h1>
+           
+            <div class="error"></div>
             <input
               type="text"
-              id="firstname"
+              id="fname"
               name="firstname"
               placeholder="First Name"
-              required
+             
             />
+         
             <input
+            
               type="text"
-              id="lastname"
+              id="lname"
               name="lastname"
               placeholder="last Name"
-              required
+             
             />
-
+        
             <input
               type="text"
               id="uname"
-              name="username"
+              name="uname"
               placeholder="username"
-              required
+             
             />
 
-            <input type="text" id="email" name="email" placeholder="email"  required/>
-
+          
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="email"
+           
+            />
+ 
             <input
               type="password"
               id="pword"
-              name="password"
+              name="pword"
               placeholder="password"
-              required
+              require
             />
-
-            <input
-              type="password"
-              id="cpword"
-              name="confirm-password"
-              placeholder="confirm password"
-              required
-            />
-          
+            <button type="submit" class="btn">SignUp</button>
             <p>Already a user <a href="login.html">Login</a></p>
           </form>
         </div>
@@ -103,5 +109,6 @@
     </footer>
 
     <script src="./asset/js/signup.js"></script>
+    <script src="./asset/js/reuseable.js"></script>
   </body>
 </html>

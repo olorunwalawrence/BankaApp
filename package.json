@@ -7,7 +7,7 @@
     "start:dev": "nodemon app.js --exec babel-node --",
     "start": "babel-node app.js",
     "migrate": "babel-node server/models/createtables.js && npm run seed",
-    "unmigrate": "babel-node server/models/undoTable/index.js && npm run migrate && npm run start:dev",
+    "unmigrate": "babel-node server/models/undoTable/index.js && npm run migrate && npm start",
     "test:dev": "  nyc --reporter=html --reporter=text mocha dummy/test --compilers js:babel-core/register --timeout 50000ms --exit",
     "test": "npm run test:dev",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -15,7 +15,7 @@
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "seed": "babel-node server/seeder/index.js",
     "build": "babel server -d build",
-    "heroku-postbuild": "npm run migrate npm start"
+    "heroku-postbuild": "npm run unmigrate "
   },
   "author": "olorunwa lawrence",
   "license": "ISC",

@@ -52,7 +52,7 @@ const fieldValidator = (type, args) => {
     return response;
   }
   if (type == 'account') {
-    const expectedInput = ['type'];
+    const expectedInput = ['type', 'address', 'phoneNumber','bvnNumber'];
     for (const input in args) {
       inputFieldCount.push(input);
       const inputField = args[input];
@@ -69,9 +69,9 @@ const fieldValidator = (type, args) => {
         response.error = `${empty} is not account creation request`
       }
     }
-    if (inputFieldCount.length < 1) {
+    if (inputFieldCount.length < 4) {
       response.status = 400;
-      response.error = 'type is required';
+      response.error = 'type, address, phoneNumber,bvnNumberis required';
     }
     return response;
   }

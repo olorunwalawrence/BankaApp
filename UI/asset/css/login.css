@@ -1,33 +1,5 @@
 
-section{
-    background-color: white;
-    margin:0 auto;
-    width:85%;
-    height: 70vh;
-}
-
-.form-h1{
-    color:rgb(73, 69, 69);
-    text-align: center;
-}
-
-
-a{
-    text-decoration: none;
-    color:red;
-}
-
-
 @media(min-width: 900px) {
-    .banner-text{
-        color:rgb(199, 193, 193);
-        font-size: 14px;
-        font-family: 'Times New Roman', Times, serif;
-        text-align: center;
-        width:500px;
-        position: relative;
-        left:27%;
-    }
    
   }
 @media(max-width: 900px) {
@@ -50,16 +22,7 @@ a{
       text-align: center;
     }
     
-    
-    .banner-text{
-        color:rgb(199, 193, 193);
-        font-size: 14px;
-        font-family: 'Times New Roman', Times, serif;
-        text-align: center;
-        width:450px;
-        position: relative;
-        left:19%;
-    }
+
   }
   
   @media  (max-width: 690px) {
@@ -97,7 +60,7 @@ a{
           width:100%;
           padding:10px;
           margin-top:30px;
-          margin-left:5%;
+          margin-left:1%;
           border:none;
           color:white;
           background:green;

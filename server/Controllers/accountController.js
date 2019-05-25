@@ -25,7 +25,10 @@ export default class Account {
     const openbal = num.toFixed(2);
     const openingBalance = parseFloat(openbal);
     const {
-      type
+      type,
+      address,
+      phoneNumber,
+      bvnNumber
     } = req.body;
     if (type !== 'savings' && type !== 'current') {
       return res.status(400).json({
@@ -37,6 +40,9 @@ export default class Account {
     const currentbalance = openingBalance;
     const accountvalue = [
       type,
+      address,
+      phoneNumber,
+      bvnNumber,
       openingBalance,
       currentbalance,
       firstname,
@@ -58,8 +64,8 @@ export default class Account {
         balance: openingBalance
       }
     })).catch((error) => {
-      res.status(409).json({
-        status: 409,
+      res.status(400).json({
+        status: 400,
         error: `account with ${error.detail}`
       });
     });
