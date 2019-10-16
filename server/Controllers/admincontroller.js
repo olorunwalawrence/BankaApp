@@ -244,7 +244,7 @@ export default class AdminFunctionality {
 		try {
 			const { isAdmin } = req.decoded;
 			const { email } = req.body;
-
+console.log('>>>>>>>>>>>>>>>>>>>>', 'this is working')
 			if (!verifyAdmin(isAdmin)) {
 				return res.status(400).json({
 					status: 400,
